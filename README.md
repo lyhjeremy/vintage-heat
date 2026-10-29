@@ -1,0 +1,87 @@
+# Vintage Heat
+
+Do hot growing seasons make better wine, or only better wine in cool places? This project joins 62,348 Wine Enthusiast reviews from 60 wine regions (vintages 2000 to 2016) to ERA5-Land weather for each region's growing season, and estimates how much a season warmer or wetter than the region's 1991-2020 normal moves a critic's score.
+
+[Interactive site](https://lyhjeremy.github.io/vintage-heat/) · [Write-up](https://lyhjeremy.github.io/vintage-heat/overview/)
+
+Design and copy follow [these standards](https://github.com/lyhjeremy/lyhjeremy/blob/main/DESIGN_STANDARDS.md).
+
+## Results
+
+A growing season 1 °C warmer than a region's normal moved scores by +0.23 points in cool regions and +0.08 points in warm ones. Both are small next to a score standard deviation of 3.0 points, the gap between them is not statistically clear, and the effect never turns negative in warm regions.
+
+- In the 17 regions whose normal season is below 17 °C, a season 1 °C warmer than normal moved scores by +0.23 points (95% interval 0.01 to 0.45, p = 0.041). In the 43 regions at 17 °C and above it moved them by +0.08 points (−0.07 to 0.22, p = 0.29). The difference between the two is −0.15 points (p = 0.18).
+- By Jones's four bands: cool +0.26 (3 regions), intermediate +0.23 (14), warm −0.01 (22), hot +0.19 (21) points per °C.
+- Harvest rain: −0.04 points per 100 mm more than normal (−0.17 to 0.08, p = 0.51).
+- Placebo: the following year's season, which cannot affect the wine, gives +0.12 (below 17 °C, p = 0.29) and +0.05 (above, p = 0.42).
+- Out of sample, leaving out one vintage at a time, the weather terms cut the error in predicting region-variety mean scores from 1.301 to 1.280 points (1.6%).
+- With region linear trends in place of vintage-year fixed effects, both estimates shrink and lose significance: +0.10 (p = 0.26) and +0.03 (p = 0.69). Adding log price raises both: +0.24 (p = 0.002) and +0.14 (p = 0.033).
+- Weather explains 0.08% of the score variation left after the region, year, variety and taster fixed effects.
+
+![Effect of a season 1 °C warmer than normal, by climate group, with 95% intervals](figures/02_band_effects.png)
+
+## Data
+
+| Source | What | Span |
+|---|---|---|
+| Wine Enthusiast reviews (`winemag-data-130k-v2`, Kaggle, via a public GitHub mirror) | 129,971 reviews; 62,348 in the 60 regions, vintages 2000 to 2016 | vintages to 2017 |
+| Open-Meteo historical weather API, ERA5-Land | daily maximum and minimum temperature at one point per region, growing season only | 1991 to 2020 |
+| Open-Meteo historical weather API, ERA5 | daily precipitation in the two harvest months (Open-Meteo returns no ERA5-Land rain) | 1991 to 2020 |
+| Wikipedia and Wikidata | coordinates and elevation for each region's point | as of October 2026 |
+| Natural Earth | 1:110m land outlines for the map | |
+
+Vintage is the first year in the wine's title. A region is `country / province / region_1` (or `country / province` where `region_1` is empty) with at least 400 reviews and 10 vintages from 2000 to 2016; 7 catch-all labels such as "California" and "Toscana" are dropped. The region list was frozen in `data/regions.csv` before any weather was fetched. Every data decision is in [`docs/decisions.md`](docs/decisions.md).
+
+## Method
+
+Growing season: April to October in the north, October to April in the south. Per season and region: mean temperature (GST), growing degree days above 10 °C, days above 35 °C, and harvest rain (September and October, or March and April). Each is expressed as an anomaly against the region's 1991-2020 mean.
+
+The main model is a review-level regression of points on the GST anomaly (separately for regions below and above 17 °C normal GST) and the harvest-rain anomaly, with fixed effects for region, vintage year, variety and taster, and standard errors clustered by region. Vintage-year effects absorb anything common to a year across all regions, including the warming trend and the market mood, so the weather effect comes from regions having different years from each other. Robustness runs: a continuous interaction with normal GST, Jones's four bands, region linear trends in place of year effects, log price added, region-vintage means (weighted and unweighted), named tasters only, northern hemisphere only, degree days and heat days, a leave-one-region-out sweep, a placebo with next year's weather, and a leave-one-vintage-out prediction test.
+
+Stack: Python (pandas, NumPy, SciPy, matplotlib; statsmodels for the estimator test), and plain HTML, CSS and JavaScript with no libraries for the site. Hosted on GitHub Pages.
+
+## How to run
+
+```bash
+pip install -r requirements.txt
+python scripts/fetch_data.py       # reviews into data/raw/ (gitignored)
+python scripts/fetch_weather.py    # Open-Meteo temperatures, about 8,300 weighted calls; paces itself under the hourly limit
+python scripts/fetch_rain.py       # Open-Meteo ERA5 harvest rain, about 1,800 weighted calls
+python scripts/run_all.py          # panel, weather table, models, figures, numbers, site
+python -m pytest tests/            # checks the fixed-effects estimator against statsmodels
+```
+
+`run_all.py` runs `build_panel.py`, `build_weather.py`, `analyze.py`, `make_figures.py`, `export_web.py`, `export_numbers.py` and `build_site.py`. No number on the site or in this README is typed by hand: `export_numbers.py` writes `site/numbers.json` and `build_site.py` fills the templates in `site/`. `scripts/lookup_regions.py` is the one-off helper that drafted the coordinates.
+
+## Repo layout
+
+| Path | Contents |
+|---|---|
+| `scripts/` | fetchers, panel and weather builders, models, figures, site builders |
+| `data/` | `regions.csv` (frozen region list with coordinates and sources), `reviews_panel.csv.gz`, `weather_seasons.csv`, `region_normals.csv`; `data/raw/` is gitignored |
+| `results/` | `models.json` (every model), `numbers.json`, region-vintage cells, per-region slopes, out-of-sample detail |
+| `tables/` | coefficient table, region, vintage and taster summaries, elevation check, inclusion list |
+| `figures/` | the five static figures |
+| `index.html`, `assets/` | the interactive site |
+| `overview/` | the write-up, built from `site/overview.fragment.html` by the shared overview builder |
+| `docs/decisions.md` | data and modeling decisions |
+
+## Limitations
+
+- Tasters are not blind to vintage. A score can carry the vintage's reputation, so this measures what critics scored, not what a blind panel would.
+- Wine Enthusiast reviews what producers submit. A weak vintage may be under-submitted, which would shrink measured differences.
+- There is no review date, so the lag between vintage and tasting is unknown and differs by style.
+- One reanalysis grid point stands in for each region's many vineyards and slopes.
+- Scores sit in a narrow band (mean 88.8, standard deviation 3.0).
+- Taster and region are close to confounded: in 22 of the 60 regions one taster wrote more than 90% of the reviews.
+
+## Sources
+
+- Ashenfelter, O., Ashmore, D. and Lalonde, R. (1995). Bordeaux wine vintage quality and the weather. *Chance* 8(4), 7-14.
+- Jones, G. V., White, M. A., Cooper, O. R. and Storchmann, K. (2005). Climate change and global wine quality. *Climatic Change* 73, 319-343.
+- Jones, G. V. (2006). Climate and terroir: impacts of climate variability and change on wine. In R. W. Macqueen and L. D. Meinert (eds), *Fine Wine and Terroir: The Geoscience Perspective*, Geoscience Canada Reprint Series 9. Geological Association of Canada.
+- Muñoz-Sabater, J. et al. (2021). ERA5-Land: a state-of-the-art global reanalysis dataset for land applications. *Earth System Science Data* 13, 4349-4383. Accessed through the [Open-Meteo](https://open-meteo.com/) historical weather API (CC BY 4.0).
+
+## License
+
+Code under the MIT License. Review data belongs to Wine Enthusiast (collected in the public Kaggle dataset); weather data is ERA5-Land from the Copernicus Climate Change Service, served by Open-Meteo under CC BY 4.0.

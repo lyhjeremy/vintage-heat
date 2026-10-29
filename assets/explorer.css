@@ -1,0 +1,43 @@
+/* Vintage explorer. Works under the landing page tokens (--signal, --ink-2) and the
+   overview builder's (--accent, --ink2) through fallbacks. */
+.explorer { margin: 30px 0 0; border: 1px solid var(--edge, var(--rule)); background: var(--panel, var(--card)); padding: 20px 22px 18px; text-align: left; }
+.explorer h3 { font-family: var(--font-display, var(--display)); font-weight: 600; font-size: 27px; line-height: 1.1; margin: 0 0 4px; text-align: center; }
+.explorer .ex-sub { font-family: var(--font-display, var(--display)); font-style: italic; font-weight: 500; font-size: 18px; color: var(--ink-2, var(--ink2)); text-align: center; margin: 0 0 16px; }
+.ex-controls { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: flex-end; }
+.ex-seg { display: flex; border: 1px solid var(--edge, var(--muted)); }
+.ex-seg button { font: 600 14px/1 var(--font-body, var(--sans)); padding: 10px 14px; background: var(--paper); color: var(--ink); border: 0; cursor: pointer; }
+.ex-seg button + button { border-left: 1px solid var(--edge, var(--muted)); }
+.ex-seg button[aria-pressed="true"] { background: var(--signal, var(--accent)); color: var(--paper); }
+.ex-seg button:hover { background: var(--ink); color: var(--paper); }
+.ex-pick { flex: 1 1 15rem; min-width: 0; }
+.ex-pick label { display: block; font: 600 11.5px/1 var(--font-mono, var(--mono)); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2, var(--muted)); margin-bottom: 7px; }
+.ex-pick select { width: 100%; font: 400 15px var(--font-body, var(--sans)); padding: 9px 10px; background: var(--paper); color: var(--ink); border: 1px solid var(--edge, var(--muted)); border-radius: 0; }
+.ex-seg button:focus-visible, .ex-pick select:focus-visible { outline: 2px solid var(--signal, var(--accent)); outline-offset: 2px; }
+.ex-chart { margin-top: 16px; }
+.ex-chart svg { display: block; width: 100%; height: auto; }
+.ex-grid { stroke: var(--rule); stroke-width: 1; }
+.ex-zero { stroke: var(--edge, var(--muted)); stroke-width: 1.2; }
+.ex-axis { stroke: var(--edge, var(--muted)); }
+.ex-tick { font: 400 12px var(--font-mono, var(--mono)); fill: var(--ink-2, var(--ink2)); }
+.ex-label { font: 400 12.5px var(--font-body, var(--sans)); fill: var(--ink-2, var(--ink2)); }
+.ex-fit { stroke: var(--signal-2, var(--accent2)); stroke-width: 2.4; }
+.ex-dot { fill: var(--signal, var(--accent)); fill-opacity: .82; stroke: var(--paper); stroke-width: 1.2; }
+.ex-yr { font: 400 11px var(--font-mono, var(--mono)); fill: var(--ink-2, var(--ink2)); }
+.ex-read p { font: 400 15px/1.55 var(--font-body, var(--sans)); color: var(--ink); margin: 12px 0 0; }
+.ex-read .ex-note { color: var(--ink-2, var(--ink2)); font-size: 14px; }
+.ex-table { margin-top: 12px; font-family: var(--font-body, var(--sans)); font-size: 14px; }
+.ex-table summary { cursor: pointer; color: var(--signal, var(--accent)); }
+.ex-table .wrap-x { overflow-x: auto; }
+.ex-table table { border-collapse: collapse; width: 100%; min-width: 0; margin-top: 8px; font-size: 13.5px; }
+.ex-table th { font: 600 11px var(--font-body, var(--sans)); text-transform: uppercase; letter-spacing: .06em; text-align: left; border-bottom: 2px solid var(--ink); padding: 6px 8px; color: var(--ink-2, var(--muted)); }
+.ex-table td { border-bottom: 1px solid var(--rule); padding: 5px 8px; color: var(--ink); }
+.ex-table td.num, .ex-table th.num { text-align: right; font-family: var(--font-mono, var(--mono)); }
+.ex-skeleton { height: 420px; background: var(--rule); margin-top: 12px; }
+@media (prefers-reduced-motion: no-preference) {
+  .ex-skeleton { animation: exsk 1.6s ease-in-out infinite; }
+  @keyframes exsk { 0%, 100% { opacity: 1 } 50% { opacity: .55 } }
+}
+@media (max-width: 560px) {
+  .explorer { padding: 16px 12px 14px; }
+  .ex-skeleton { height: 300px; }
+}

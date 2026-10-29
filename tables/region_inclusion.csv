@@ -1,0 +1,68 @@
+region,reviews,vintages,dropped_reason,included
+US / California / Napa Valley,4281,17,,True
+US / Washington / Columbia Valley (WA),4041,17,,True
+US / California / Russian River Valley,3039,17,,True
+US / California / Paso Robles,2302,17,,True
+US / California / California,2274,17,state-wide label,False
+Argentina / Mendoza Province / Mendoza,2269,17,,True
+US / Oregon / Willamette Valley,2217,17,,True
+France / Alsace / Alsace,2124,16,,True
+Italy / Piedmont / Barolo,1596,14,,True
+US / New York / Finger Lakes,1538,17,,True
+US / California / Sonoma Coast,1473,16,,True
+France / Bordeaux / Bordeaux (generic),1447,16,,True
+Spain / Northern Spain / Rioja,1443,17,,True
+Italy / Tuscany / Brunello di Montalcino,1436,11,,True
+Portugal / Douro,1267,16,,True
+Italy / Tuscany / Toscana,1168,16,region-wide IGT,False
+US / California / Sonoma County,1138,17,,True
+US / Washington / Walla Walla Valley (WA),1060,14,,True
+Germany / Mosel,1029,12,,True
+Italy / Tuscany / Chianti Classico,1027,15,,True
+US / California / Santa Barbara County,984,17,,True
+US / California / Sta. Rita Hills,971,13,,True
+US / Washington / Yakima Valley,969,16,,True
+US / California / Carneros,966,16,,True
+Portugal / Alentejano,937,14,,True
+Italy / Sicily & Sardinia / Sicilia,920,17,island-wide DOC and IGT,False
+US / California / Dry Creek Valley,905,17,,True
+France / Provence / Côtes de Provence,856,15,,True
+Chile / Colchagua Valley,816,17,,True
+US / California / Santa Ynez Valley,801,14,,True
+US / California / Santa Lucia Highlands,799,14,,True
+New Zealand / Marlborough,793,16,,True
+Italy / Piedmont / Barbaresco,793,14,,True
+US / California / Lodi,789,15,,True
+US / California / Alexander Valley,766,16,,True
+US / California / Central Coast,734,17,super-AVA running about 400 km from the Bay Area to Santa Barbara,False
+Spain / Northern Spain / Ribera del Duero,722,17,,True
+US / Washington / Red Mountain,719,14,,True
+US / California / Santa Maria Valley,697,16,,True
+Italy / Northeastern Italy / Alto Adige,689,16,,True
+Portugal / Tejo,665,10,,True
+Austria / Burgenland,664,16,,True
+US / California / Anderson Valley,620,16,,True
+US / California / Sonoma Valley,616,17,,True
+Chile / Maipo Valley,614,17,,True
+Austria / Niederösterreich,592,13,,True
+Chile / Casablanca Valley,588,15,,True
+France / Burgundy / Chablis,558,13,,True
+US / Washington / Horse Heaven Hills,558,13,,True
+France / Bordeaux / Saint-Émilion,558,16,,True
+US / New York / North Fork of Long Island,556,16,,True
+France / Loire Valley / Sancerre,554,14,,True
+US / Oregon / Dundee Hills,554,14,,True
+US / California / Santa Cruz Mountains,537,16,,True
+US / Virginia / Virginia,523,12,state-wide label,False
+Portugal / Lisboa,503,11,,True
+France / Southwest France / Cahors,490,14,,True
+Chile / Maule Valley,464,15,,True
+France / Champagne / Champagne,462,15,,True
+US / California / Livermore Valley,442,14,,True
+US / Oregon / Oregon,420,16,state-wide label,False
+South Africa / Stellenbosch,418,17,,True
+Italy / Veneto / Amarone della Valpolicella Classico,416,14,,True
+US / Washington / Washington,414,15,state-wide label,False
+Austria / Kamptal,408,16,,True
+US / California / Edna Valley,406,15,,True
+US / California / Rutherford,406,15,,True

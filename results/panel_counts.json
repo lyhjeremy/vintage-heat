@@ -1,0 +1,13 @@
+{
+ "reviews_all": 129971,
+ "reviews_with_vintage": 125322,
+ "reviews_2000_2016": 123600,
+ "labels_passing_counts": 67,
+ "labels_dropped_catch_all": 7,
+ "regions": 60,
+ "panel_reviews": 62348,
+ "panel_reviews_with_price": 59318,
+ "panel_tasters": 15,
+ "panel_varieties": 306,
+ "panel_no_taster": 13104
+}

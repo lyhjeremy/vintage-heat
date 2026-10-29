@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Vintage Heat: does a hot growing season make better wine?</title>
+<meta name="description" content="{{nPanel}} Wine Enthusiast reviews from {{nRegions}} regions joined to ERA5-Land growing-season weather. A season 1 °C warmer than normal moved scores by {{cool}} points in cool regions and {{warm}} in warm ones." />
+<meta property="og:title" content="Vintage Heat" />
+<meta property="og:description" content="Does a hot growing season make better wine, or only in cool places? {{nPanel}} reviews, {{nRegions}} regions, 30 years of weather." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://lyhjeremy.github.io/vintage-heat/" />
+<link rel="stylesheet" href="assets/family.css" />
+<link rel="stylesheet" href="assets/page.css" />
+<link rel="stylesheet" href="assets/explorer.css" />
+</head>
+<body>
+<a href="overview/" data-overview-link class="bar">Read the full writeup&nbsp;&rarr;</a>
+
+<div class="wrap">
+  <header>
+    <p class="house">{{nPanel}} wine reviews against thirty years of growing-season weather</p>
+    <h1>An extra degree of summer is worth a fraction of a point</h1>
+    <p class="lede">A growing season 1 °C warmer than a region's normal moved Wine Enthusiast scores by {{cool}} points in cool regions and {{warm}} points in warm ones. The gap between the two is not statistically clear, and the effect never turns negative.</p>
+    <p class="byline">By Jeremy Lee · Python, pandas, SciPy, ERA5-Land through Open-Meteo</p>
+  </header>
+
+  <section class="explorer" data-explorer data-src="assets/data.json" aria-labelledby="ex-h">
+    <h3 id="ex-h">Each vintage against its season</h3>
+    <p class="ex-sub">pick a region</p>
+    <div class="ex-skeleton" aria-hidden="true"></div>
+    <div class="ex-body" hidden>
+      <div class="ex-controls">
+        <div class="ex-seg" role="group" aria-label="Climate group">
+          <button type="button" data-group="cool" aria-pressed="true">Below {{split}} °C ({{nCool}})</button>
+          <button type="button" data-group="warm" aria-pressed="false">{{split}} °C and above ({{nWarm}})</button>
+        </div>
+        <div class="ex-pick">
+          <label for="ex-region">Region (normal season temperature)</label>
+          <select id="ex-region"></select>
+        </div>
+      </div>
+      <div class="ex-chart"></div>
+      <div class="ex-read" aria-live="polite"></div>
+      <details class="ex-table">
+        <summary>The numbers for this region</summary>
+        <div class="wrap-x"><table>
+          <thead><tr><th>Vintage</th><th class="num">Season vs normal, °C</th><th class="num">Score vs expected</th><th class="num">Mean score</th><th class="num">Reviews</th></tr></thead>
+          <tbody></tbody>
+        </table></div>
+      </details>
+    </div>
+    <noscript><p>The explorer needs JavaScript. The figures below show the same results.</p></noscript>
+  </section>
+  <p class="byline" style="margin-top:12px">"Score against expectation" is a vintage's average review score after removing the region's average, the year's average across all {{nRegions}} regions, and the variety and taster of each review. Each dot is one vintage, sized by its number of reviews.</p>
+
+  <ol class="findings">
+    <li><div class="n">{{cool}}</div><p>points per 1 °C of extra season warmth in the {{nCool}} regions whose normal season is below {{split}} °C (95% interval {{coolCi}}, {{coolP}}).</p></li>
+    <li><div class="n">{{warm}}</div><p>points per 1 °C in the {{nWarm}} regions at {{split}} °C and above ({{warmCi}}, {{warmP}}). Heat did not lower scores in warm places.</p></li>
+    <li><div class="n">{{plcCool}}</div><p>points for the placebo: the following year's season, which cannot touch the wine, in the cool group ({{plcCoolP}}). It is about half the real estimate, so the real one is not clean.</p></li>
+    <li><div class="n">{{oosImprove}}%</div><p>smaller prediction error when the weather is added to region-variety averages and one vintage is held out at a time ({{rmseBase}} to {{rmseWeather}} points).</p></li>
+  </ol>
+
+  <p class="course">First</p>
+  <h2>Each region against its own normal</h2>
+  <p>The reviews are {{nPanel}} wines from {{nRegions}} appellations with at least 400 reviews and 10 vintages from 2000 to 2016, from Napa to Mosel to Marlborough. Each region has one weather point, and each season (April to October in the north, October to April in the south) is set against that point's 1991-2020 average. A season 1 °C warmer than normal means the same thing in Mosel and in Paso Robles: one degree warmer than that place usually is.</p>
+  <p>The model compares regions within the same vintage year, so anything that moved every score in a year, including the warming of about {{warmingDecade}} °C a decade across these regions, is taken out. It also holds variety and taster fixed. {{split}} °C is the line Jones (2006) draws between intermediate and warm wine climates.</p>
+  <figure><img src="figures/04_map.png" width="2000" height="1000" alt="World map of the 60 regions, most in California, Oregon and Washington and in western Europe, with a few in Chile, Argentina, South Africa and New Zealand. Normal seasons run from {{gstMin}} °C in {{gstMinRegion}} to {{gstMax}} °C in {{gstMaxRegion}}."><figcaption>The {{nRegions}} regions, colored by their normal growing-season temperature.</figcaption></figure>
+
+  <p class="course">Second</p>
+  <h2>Cool places gain a little more, and nowhere loses</h2>
+  <p>Below {{split}} °C, a degree of extra warmth added {{cool}} points; above it, {{warm}}. The difference, {{diff}} points, could easily be chance ({{diffP}}). Split into Jones's four bands, the estimates run {{band_cool}} (cool, only {{nBand_cool}} regions), {{band_intermediate}} (intermediate), {{band_warm}} (warm) and {{band_hot}} (hot): there is no steady decline from cool to hot, and the hottest band does not turn negative. Harvest rain, which Ashenfelter and colleagues found decisive in Bordeaux, moved scores by {{rain}} points per 100 mm ({{rainP}}).</p>
+  <p>On a scale where the scores have a standard deviation of {{pointsSd}} points, a typical season anomaly of {{anomSd}} °C shifts a cool region's scores by about {{coolPerSd}} points. That is real at the margin and invisible on a shelf.</p>
+  <figure><img src="figures/02_band_effects.png" width="1720" height="880" alt="Dot and interval chart: {{cool}} points per degree below 17 °C with an interval just above zero, {{warm}} above 17 °C with an interval spanning zero, and four Jones bands whose intervals mostly span zero."><figcaption>Points per 1 °C warmer season, with 95% intervals clustered by region.</figcaption></figure>
+
+  <p class="course">Third</p>
+  <h2>The checks weaken it</h2>
+  <p>The following year's weather cannot change a wine, so it should predict nothing. It gives {{plcCool}} points in the cool group ({{plcCoolP}}), about half the real estimate. That is not significant, but it suggests some of the real estimate may come from regions trending together rather than from the season itself. Replacing the year effects with a separate linear trend for each region shrinks both estimates to {{trendCool}} and {{trendWarm}}, neither significant. Adding log price raises both, to {{priceCool}} and {{priceWarm}}, which fits the idea that a good vintage's reputation is priced in. Averaging to one number per region and vintage reverses the order of the two groups when the cells are unweighted.</p>
+  <figure><img src="figures/05_robustness.png" width="1720" height="1080" alt="Estimates for both groups under eight specifications. The cool-group estimate stays positive but its interval crosses zero under region trends, unweighted cell means and the placebo; the warm-group estimate crosses zero in most."><figcaption>The two estimates under each check, with 95% intervals.</figcaption></figure>
+  <figure><img src="figures/03_placebo.png" width="1720" height="760" alt="The vintage's own season against the following year's season. The placebo estimates are smaller but not zero, and all their intervals span zero."><figcaption>Real season against next year's season, same model.</figcaption></figure>
+
+  <h2>What it adds up to</h2>
+  <p>Warm seasons nudge critics' scores up, more clearly in cool regions than warm ones, but the effect is a fraction of a point, weather explains {{withinR2Pct}}% of what is left after region, year, variety and taster, and the estimate does not survive every reasonable specification. The question was whether the effect flips sign between cool and warm places. In these {{nRegions}} regions over 2000 to 2016 it does not.</p>
+
+  <div class="box">
+    <h3>Limitations</h3>
+    <ul>
+      <li>Tasters are not blind to vintage. A score can carry the vintage's reputation, so this measures what critics scored, not what a blind panel would.</li>
+      <li>Wine Enthusiast reviews what producers submit. A weak vintage may be under-submitted, which would shrink measured differences.</li>
+      <li>There is no review date, so the lag between vintage and tasting is unknown and differs by style.</li>
+      <li>One reanalysis grid point stands in for each region's vineyards and slopes. Rain comes from ERA5 at a coarser grid than the ERA5-Land temperatures, because Open-Meteo serves no ERA5-Land rain.</li>
+      <li>Taster and region are close to confounded: in {{oneTaster90}} of the {{nRegions}} regions one taster wrote more than 90% of the reviews.</li>
+      <li>Only {{nBand_cool}} regions fall in Jones's cool band, and with that few clusters its interval should not be trusted.</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h3>Data and method</h3>
+    <p>{{nReviewsAll}} Wine Enthusiast reviews from the public <code>winemag-data-130k-v2</code> set; temperatures from ERA5-Land and harvest rain from ERA5, both through the Open-Meteo archive. Review-level regression of points on the season temperature anomaly (by climate group) and the harvest-rain anomaly, with region, vintage-year, variety and taster fixed effects and standard errors clustered by region. Every number on this page is written by the code in the <a href="https://github.com/lyhjeremy/vintage-heat">repo</a>; the <a href="overview/">write-up</a> has the full method and every check.</p>
+  </div>
+
+  <h2>Sources</h2>
+  <ol class="refs">
+    <li>Ashenfelter, O., Ashmore, D. and Lalonde, R. (1995). Bordeaux wine vintage quality and the weather. <i>Chance</i> 8(4), 7-14.</li>
+    <li>Jones, G. V., White, M. A., Cooper, O. R. and Storchmann, K. (2005). Climate change and global wine quality. <i>Climatic Change</i> 73, 319-343.</li>
+    <li>Jones, G. V. (2006). Climate and terroir: impacts of climate variability and change on wine. In <i>Fine Wine and Terroir: The Geoscience Perspective</i>, Geoscience Canada Reprint Series 9.</li>
+    <li>Muñoz-Sabater, J. et al. (2021). ERA5-Land: a state-of-the-art global reanalysis dataset for land applications. <i>Earth System Science Data</i> 13, 4349-4383.</li>
+    <li>Weather data by <a href="https://open-meteo.com/">Open-Meteo.com</a> (CC BY 4.0).</li>
+  </ol>
+
+  <footer>MIT License · © 2026 Jeremy Lee · <a href="overview/">Full writeup</a> · <a href="https://github.com/lyhjeremy/vintage-heat">Source on GitHub</a></footer>
+</div>
+<script src="assets/explorer.js"></script>
+</body>
+</html>

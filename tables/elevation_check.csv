@@ -1,0 +1,61 @@
+region,source_elev_min_m,source_elev_max_m,elev_source,elev_source_note,moved,om_elevation_m,distance_m,check
+US / California / Napa Valley,110.0,110.0,https://en.wikipedia.org/wiki/Napa_Valley_AVA,Wikidata elevation of the AVA item,,103.0,7.0,pass
+US / Washington / Columbia Valley (WA),0.0,610.0,https://en.wikipedia.org/wiki/Columbia_Valley_AVA,"article: valley generally does not exceed 2,000 ft (610 m)",,344.0,0.0,pass
+US / California / Russian River Valley,40.0,49.0,https://en.wikipedia.org/wiki/Russian_River_Valley_AVA,article: expansion area 130 to 160 ft (40 to 49 m),,32.0,8.0,pass
+US / California / Paso Robles,223.0,223.0,"https://en.wikipedia.org/wiki/Paso_Robles,_California",Wikidata elevation of the town,,249.0,26.0,pass
+Argentina / Mendoza Province / Mendoza,918.0,1000.0,https://en.wikipedia.org/wiki/Luján_de_Cuyo,article: vineyards around 1000 m; Wikidata 918 m,,924.0,0.0,pass
+US / Oregon / Willamette Valley,61.0,305.0,https://en.wikipedia.org/wiki/Willamette_Valley_AVA,"article: vineyards 200 to 1,000 ft",,148.0,0.0,pass
+France / Alsace / Alsace,198.0,198.0,https://en.wikipedia.org/wiki/Colmar,Wikidata elevation of the town,,197.0,1.0,pass
+Italy / Piedmont / Barolo,305.0,305.0,"https://en.wikipedia.org/wiki/Barolo,_Piedmont",Wikidata elevation of the town,,389.0,84.0,pass
+US / New York / Finger Lakes,230.0,230.0,"https://en.wikipedia.org/wiki/Hammondsport,_New_York",Wikidata elevation of the town,,233.0,3.0,pass
+US / California / Sonoma Coast,25.0,25.0,"https://en.wikipedia.org/wiki/Sebastopol,_California",Wikidata elevation of the town (82 ft),,82.0,57.0,pass
+Spain / Northern Spain / Rioja,479.0,479.0,"https://en.wikipedia.org/wiki/Haro,_La_Rioja",Wikidata elevation of the town,,452.0,27.0,pass
+Italy / Tuscany / Brunello di Montalcino,567.0,567.0,https://en.wikipedia.org/wiki/Montalcino,Wikidata elevation of the town,,565.0,2.0,pass
+Portugal / Douro,760.0,760.0,https://en.wikipedia.org/wiki/Alijó,Wikidata elevation of the town,,609.0,151.0,pass
+US / California / Sonoma County,32.0,32.0,"https://en.wikipedia.org/wiki/Healdsburg,_California",Wikidata elevation of the town (105 ft),,45.0,13.0,pass
+US / Washington / Walla Walla Valley (WA),152.0,457.0,https://en.wikipedia.org/wiki/Walla_Walla_Valley_AVA,"article: 500 to 1,500 ft",,411.0,0.0,pass
+Germany / Mosel,107.0,415.0,https://en.wikipedia.org/wiki/Bernkastel-Kues,article: 107 m at the river to 415 m; Wikidata 110 m,,117.0,0.0,pass
+Italy / Tuscany / Chianti Classico,236.0,236.0,https://en.wikipedia.org/wiki/Greve_in_Chianti,Wikidata elevation of the town,,236.0,0.0,pass
+US / California / Santa Barbara County,174.0,174.0,"https://en.wikipedia.org/wiki/Los_Alamos,_California","infobox elevation (568 ft); point moved here, see docs/decisions.md","moved from the county centroid (34.540, -120.030), which sits at 888 m in the San Rafael Mountains, to Los Alamos between the Santa Maria and Santa Ynez valleys",177.0,3.0,pass
+US / California / Sta. Rita Hills,32.0,32.0,"https://en.wikipedia.org/wiki/Lompoc,_California",Wikidata elevation of the town (105 ft),,126.0,94.0,pass
+US / Washington / Yakima Valley,0.0,400.0,https://en.wikipedia.org/wiki/Yakima_Valley_AVA,"article: highest point in the AVA 1,300 ft (400 m)",,327.0,0.0,pass
+US / California / Carneros,0.0,120.0,https://en.wikipedia.org/wiki/Los_Carneros_AVA,article: most vineyards near sea level to 400 ft,,49.0,0.0,pass
+Portugal / Alentejano,295.0,295.0,https://en.wikipedia.org/wiki/Évora,Wikidata elevation of the town,,270.0,25.0,pass
+US / California / Dry Creek Valley,32.0,32.0,"https://en.wikipedia.org/wiki/Healdsburg,_California",Wikidata elevation of the town (105 ft),,62.0,30.0,pass
+France / Provence / Côtes de Provence,215.0,215.0,https://en.wikipedia.org/wiki/Brignoles,Wikidata elevation of the town,,219.0,4.0,pass
+Chile / Colchagua Valley,174.0,174.0,"https://en.wikipedia.org/wiki/Santa_Cruz,_Chile",Wikidata elevation of the town,,167.0,7.0,pass
+US / California / Santa Ynez Valley,154.0,154.0,"https://en.wikipedia.org/wiki/Solvang,_California",Wikidata elevation of the town,,155.0,1.0,pass
+US / California / Santa Lucia Highlands,12.0,366.0,https://en.wikipedia.org/wiki/Santa_Lucia_Highlands_AVA,"article: vineyards up to 1,200 ft",,96.0,0.0,pass
+New Zealand / Marlborough,,,"https://en.wikipedia.org/wiki/Blenheim,_New_Zealand",no elevation in source,,4.0,,no elevation in source
+Italy / Piedmont / Barbaresco,274.0,274.0,"https://en.wikipedia.org/wiki/Barbaresco,_Piedmont",Wikidata elevation of the town,,271.0,3.0,pass
+US / California / Lodi,15.0,15.0,"https://en.wikipedia.org/wiki/Lodi,_California",Wikidata elevation of the town (49 ft),,33.0,18.0,pass
+US / California / Alexander Valley,65.0,65.0,"https://en.wikipedia.org/wiki/Geyserville,_California",Wikidata elevation of the town (213 ft),,58.0,7.0,pass
+Spain / Northern Spain / Ribera del Duero,798.0,798.0,https://en.wikipedia.org/wiki/Aranda_de_Duero,Wikidata elevation of the town,,823.0,25.0,pass
+US / Washington / Red Mountain,152.0,457.0,https://en.wikipedia.org/wiki/Red_Mountain_AVA,"article: 500 to 1,500 ft",,209.0,0.0,pass
+US / California / Santa Maria Valley,90.0,240.0,https://en.wikipedia.org/wiki/Santa_Maria_Valley_AVA,article: vineyards 300 to 800 ft,,139.0,0.0,pass
+Italy / Northeastern Italy / Alto Adige,262.0,262.0,https://en.wikipedia.org/wiki/Bolzano,Wikidata elevation of the town,,283.0,21.0,pass
+Portugal / Tejo,,,"https://en.wikipedia.org/wiki/Santarém,_Portugal",no elevation in source,,105.0,,no elevation in source
+Austria / Burgenland,133.0,133.0,https://en.wikipedia.org/wiki/Neusiedl_am_See,Wikidata elevation of the town,,160.0,27.0,pass
+US / California / Anderson Valley,116.0,116.0,"https://en.wikipedia.org/wiki/Boonville,_California",Wikidata elevation of the town,,191.0,75.0,pass
+US / California / Sonoma Valley,26.0,26.0,"https://en.wikipedia.org/wiki/Sonoma,_California",Wikidata elevation of the town (85 ft),,70.0,44.0,pass
+Chile / Maipo Valley,380.0,380.0,https://en.wikipedia.org/wiki/Maipo_Province,Wikidata elevation of the province item,,445.0,65.0,pass
+Austria / Niederösterreich,203.0,203.0,https://en.wikipedia.org/wiki/Krems_an_der_Donau,Wikidata elevation of the town,,224.0,21.0,pass
+Chile / Casablanca Valley,293.0,293.0,"https://en.wikipedia.org/wiki/Casablanca,_Chile",Wikidata elevation of the town,,260.0,33.0,pass
+France / Bordeaux / Saint-Émilion,23.0,23.0,https://en.wikipedia.org/wiki/Saint-Émilion,Wikidata elevation of the town,,84.0,61.0,pass
+US / Washington / Horse Heaven Hills,61.0,549.0,https://en.wikipedia.org/wiki/Horse_Heaven_Hills_AVA,"article: 200 to 1,800 ft",,159.0,0.0,pass
+France / Burgundy / Chablis,140.0,140.0,https://en.wikipedia.org/wiki/Chablis,Wikidata elevation of the town,,140.0,0.0,pass
+US / New York / North Fork of Long Island,9.0,9.0,"https://en.wikipedia.org/wiki/Cutchogue,_New_York",Wikidata elevation of the hamlet,,17.0,8.0,pass
+US / Oregon / Dundee Hills,61.0,325.0,https://en.wikipedia.org/wiki/Dundee_Hills_AVA,"article: 200 ft contour to 1,067 ft",,225.0,0.0,pass
+France / Loire Valley / Sancerre,256.0,312.0,https://en.wikipedia.org/wiki/Sancerre,Wikidata 256 m; article: hill 312 m,,295.0,0.0,pass
+US / California / Santa Cruz Mountains,120.0,910.0,https://en.wikipedia.org/wiki/Santa_Cruz_Mountains_AVA,"article: 400 or 800 ft up to 3,000 ft",,640.0,0.0,pass
+France / Bordeaux / Bordeaux (generic),6.0,6.0,https://en.wikipedia.org/wiki/Bordeaux,Wikidata elevation of the city,,22.0,16.0,pass
+Portugal / Lisboa,,,https://en.wikipedia.org/wiki/Torres_Vedras,no elevation in source,,96.0,,no elevation in source
+France / Southwest France / Cahors,105.0,332.0,https://en.wikipedia.org/wiki/Cahors,article: 105 to 332 m,,138.0,0.0,pass
+Chile / Maule Valley,102.0,102.0,https://en.wikipedia.org/wiki/Talca,Wikidata elevation of the city,,95.0,7.0,pass
+France / Champagne / Champagne,93.0,93.0,https://en.wikipedia.org/wiki/Épernay,Wikidata elevation of the town,,91.0,2.0,pass
+US / California / Livermore Valley,137.0,244.0,https://en.wikipedia.org/wiki/Livermore_Valley_AVA,article: 450 to 800 ft,,175.0,0.0,pass
+South Africa / Stellenbosch,136.0,136.0,https://en.wikipedia.org/wiki/Stellenbosch,Wikidata elevation of the town,,113.0,23.0,pass
+Italy / Veneto / Amarone della Valpolicella Classico,190.0,190.0,https://en.wikipedia.org/wiki/Negrar_di_Valpolicella,Wikidata elevation of the town,,260.0,70.0,pass
+Austria / Kamptal,219.0,219.0,https://en.wikipedia.org/wiki/Langenlois,Wikidata elevation of the town,,248.0,29.0,pass
+US / California / Edna Valley,37.0,180.0,https://en.wikipedia.org/wiki/Edna_Valley_AVA,"article: floor 120 to 300 ft, uplands to the 600 ft contour",,89.0,0.0,pass
+US / California / Rutherford,0.0,150.0,https://en.wikipedia.org/wiki/Rutherford_AVA,article: lowland below the 500 ft soil break,,55.0,0.0,pass
