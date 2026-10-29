@@ -1,6 +1,6 @@
 # Vintage Heat
 
-Do hot growing seasons make better wine, or only better wine in cool places? This project joins {{nPanel}} Wine Enthusiast reviews from {{nRegions}} wine regions (vintages 2000 to 2016) to ERA5-Land weather for each region's growing season, and estimates how much a season warmer or wetter than the region's 1991-2020 normal moves a critic's score.
+Do hot growing seasons make better wine, or only better wine in cool places? This project joins {{nPanel}} Wine Enthusiast reviews from {{nRegions}} wine regions (vintages 2000 to 2016) to reanalysis weather for each region's growing season (ERA5-Land temperatures, ERA5 rain), and estimates how much a season warmer or wetter than the region's 1991-2020 normal moves a critic's score.
 
 [Interactive site](https://lyhjeremy.github.io/vintage-heat/) · [Write-up](https://lyhjeremy.github.io/vintage-heat/overview/)
 
@@ -8,14 +8,14 @@ Design and copy follow [these standards](https://github.com/lyhjeremy/lyhjeremy/
 
 ## Results
 
-A growing season 1 °C warmer than a region's normal moved scores by {{cool}} points in cool regions and {{warm}} points in warm ones. Both are small next to a score standard deviation of {{pointsSd}} points, the gap between them is not statistically clear, and the effect never turns negative in warm regions.
+A growing season 1 °C warmer than a region's normal moved scores by {{cool}} points in cool regions and {{warm}} points in warm ones. Both are small next to a score standard deviation of {{pointsSd}} points, the gap between them is not statistically clear, and no climate group shows a significant negative effect.
 
 - In the {{nCool}} regions whose normal season is below {{split}} °C, a season 1 °C warmer than normal moved scores by {{cool}} points (95% interval {{coolCi}}, {{coolP}}). In the {{nWarm}} regions at {{split}} °C and above it moved them by {{warm}} points ({{warmCi}}, {{warmP}}). The difference between the two is {{diff}} points ({{diffP}}).
-- By Jones's four bands: cool {{band_cool}} ({{nBand_cool}} regions), intermediate {{band_intermediate}} ({{nBand_intermediate}}), warm {{band_warm}} ({{nBand_warm}}), hot {{band_hot}} ({{nBand_hot}}) points per °C.
+- By Jones's four bands: cool {{band_cool}} ({{nBand_cool}} regions, {{band_coolP}}), intermediate {{band_intermediate}} ({{nBand_intermediate}}, {{band_intermediateP}}), warm {{band_warm}} ({{nBand_warm}}, {{band_warmP}}), hot {{band_hot}} ({{nBand_hot}}, {{band_hotP}}) points per °C. The cool band's small p-value rests on {{nBand_cool}} clusters, too few for a clustered standard error to be trusted.
 - Harvest rain: {{rain}} points per 100 mm more than normal ({{rainCi}}, {{rainP}}).
 - Placebo: the following year's season, which cannot affect the wine, gives {{plcCool}} (below {{split}} °C, {{plcCoolP}}) and {{plcWarm}} (above, {{plcWarmP}}).
 - Out of sample, leaving out one vintage at a time, the weather terms cut the error in predicting region-variety mean scores from {{rmseBase}} to {{rmseWeather}} points ({{oosImprove}}%).
-- With region linear trends in place of vintage-year fixed effects, both estimates shrink and lose significance: {{trendCool}} ({{trendCoolP}}) and {{trendWarm}} ({{trendWarmP}}). Adding log price raises both: {{priceCool}} ({{priceCoolP}}) and {{priceWarm}} ({{priceWarmP}}).
+- With region linear trends in place of vintage-year fixed effects, both estimates shrink and lose significance: {{trendCool}} ({{trendCoolP}}) and {{trendWarm}} ({{trendWarmP}}). On the {{nPanelPrice}} reviews with a price, adding log price moves the cool estimate from {{priceSampleCool}} to {{priceCool}} and the warm one from {{priceSampleWarm}} to {{priceWarm}}. If price carried vintage reputation, both should shrink; the cool one {{priceCoolDir}} slightly and the warm one {{priceWarmDir}}.
 - Weather explains {{withinR2Pct}}% of the score variation left after the region, year, variety and taster fixed effects.
 
 ![Effect of a season 1 °C warmer than normal, by climate group, with 95% intervals](figures/02_band_effects.png)
@@ -30,7 +30,7 @@ A growing season 1 °C warmer than a region's normal moved scores by {{cool}} po
 | Wikipedia and Wikidata | coordinates and elevation for each region's point | as of October 2026 |
 | Natural Earth | 1:110m land outlines for the map | |
 
-Vintage is the first year in the wine's title. A region is `country / province / region_1` (or `country / province` where `region_1` is empty) with at least 400 reviews and 10 vintages from 2000 to 2016; {{nCatchAll}} catch-all labels such as "California" and "Toscana" are dropped. The region list was frozen in `data/regions.csv` before any weather was fetched. Every data decision is in [`docs/decisions.md`](docs/decisions.md).
+The source file has {{nDupes}} exact duplicate rows, which are dropped. Vintage is the first four-digit number from 1950 to 2017 in the wine's title. A region is `country / province / region_1` (or `country / province` where `region_1` is empty) with at least 400 reviews and 10 vintages from 2000 to 2016; {{nCatchAll}} catch-all labels such as "California" and "Toscana" are dropped. The region list was frozen in `data/regions.csv` before any weather was fetched. Every data decision is in [`docs/decisions.md`](docs/decisions.md).
 
 ## Method
 
@@ -48,7 +48,7 @@ python scripts/fetch_data.py       # reviews into data/raw/ (gitignored)
 python scripts/fetch_weather.py    # Open-Meteo temperatures, about 8,300 weighted calls; paces itself under the hourly limit
 python scripts/fetch_rain.py       # Open-Meteo ERA5 harvest rain, about 1,800 weighted calls
 python scripts/run_all.py          # panel, weather table, models, figures, numbers, site
-python -m pytest tests/            # checks the fixed-effects estimator against statsmodels
+python -m pytest tests/            # (pytest is in requirements.txt) checks the fixed-effects estimator against statsmodels
 ```
 
 `run_all.py` runs `build_panel.py`, `build_weather.py`, `analyze.py`, `make_figures.py`, `export_web.py`, `export_numbers.py` and `build_site.py`. No number on the site or in this README is typed by hand: `export_numbers.py` writes `site/numbers.json` and `build_site.py` fills the templates in `site/`. `scripts/lookup_regions.py` is the one-off helper that drafted the coordinates.
@@ -73,6 +73,7 @@ python -m pytest tests/            # checks the fixed-effects estimator against 
 - There is no review date, so the lag between vintage and tasting is unknown and differs by style.
 - One reanalysis grid point stands in for each region's many vineyards and slopes.
 - Scores sit in a narrow band (mean {{pointsMean}}, standard deviation {{pointsSd}}).
+- Band assignment depends on one grid point per region: ERA5-Land puts Carneros ({{carnerosGst}} °C) and Russian River Valley ({{rrvGst}} °C) in the {{carnerosBand}} band, though both are usually called cool AVAs, and the Douro point (Alijó, {{douroPointElev}} m) sits above most Douro vineyards. The elevation check compared each point with its town's elevation, not vineyard elevation.
 - Taster and region are close to confounded: in {{oneTaster90}} of the {{nRegions}} regions one taster wrote more than 90% of the reviews.
 
 ## Sources
@@ -84,4 +85,4 @@ python -m pytest tests/            # checks the fixed-effects estimator against 
 
 ## License
 
-Code under the MIT License. Review data belongs to Wine Enthusiast (collected in the public Kaggle dataset); weather data is ERA5-Land from the Copernicus Climate Change Service, served by Open-Meteo under CC BY 4.0.
+Code under the MIT License. Review data belongs to Wine Enthusiast (collected in the public Kaggle dataset); weather data is ERA5-Land (temperature) and ERA5 (precipitation) from the Copernicus Climate Change Service, served by Open-Meteo under CC BY 4.0.

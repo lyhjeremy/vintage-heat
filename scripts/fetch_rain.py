@@ -53,6 +53,8 @@ def fetch(regs, hemi, year):
 
 
 def main():
+    # every row, including the five regions excluded on 2026-10-29, so the request
+    # layout matches the cached responses; build_weather.py keeps only included ones
     regions = pd.read_csv(ROOT / "data/regions.csv")
     frames = []
     for year in YEARS:

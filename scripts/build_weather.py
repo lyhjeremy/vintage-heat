@@ -31,10 +31,14 @@ def band(t):
 
 def main():
     regions = pd.read_csv(ROOT / "data/regions.csv")
+    regions = regions[regions.included].reset_index(drop=True)
     d = pd.read_csv(ROOT / "data/raw/weather_daily.csv.gz", parse_dates=["time"]).drop(columns="precip", errors="ignore")
     if d[["tmax", "tmin"]].isna().any().any():
         raise SystemExit("missing daily temperatures")
+    # the fetch covered all 60 rows of regions.csv; keep only the included regions
+    d = d[d.region.isin(regions.region)]
     rain = pd.read_csv(ROOT / "data/raw/rain_daily.csv.gz")
+    rain = rain[rain.region.isin(regions.region)]
     if rain.precip.isna().any():
         raise SystemExit("missing daily rain")
     d = d.merge(regions[["region", "hemisphere"]], on="region")

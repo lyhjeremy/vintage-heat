@@ -15,17 +15,21 @@ FIG = ROOT / "figures"
 RES = ROOT / "results"
 PAPER, PANEL, INK, INK2, RULE, EDGE = "#F1ECE3", "#F7F3EC", "#24191B", "#5C4C4E", "#D3C8BC", "#7E7070"
 CLARET, OLIVE = "#7A2335", "#6A5A1E"
+TITLE_FAMILY = None
 NE_URL = "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_land.geojson"
 
 
 def setup_fonts():
     """Use IBM Plex Sans if a TTF copy is available (VH_TTF dir), else the default sans."""
     ttf = pathlib.Path(os.environ.get("VH_TTF", pathlib.Path.home() / "data-cache/vintage-heat/ttf"))
+    global TITLE_FAMILY
     fam = "sans-serif"
     if ttf.exists():
         for f in ttf.glob("*.ttf"):
             font_manager.fontManager.addfont(str(f))
         fam = "IBM Plex Sans"
+        # the subset 600 file registers as its own family name
+        TITLE_FAMILY = "IBM Plex Sans SemiBold"
     plt.rcParams.update({
         "font.family": fam, "font.size": 11, "axes.edgecolor": EDGE, "axes.labelcolor": INK,
         "xtick.color": INK2, "ytick.color": INK2, "text.color": INK, "figure.facecolor": PANEL,
@@ -37,7 +41,8 @@ def setup_fonts():
 def title(ax, t, sub=None):
     """Title and subtitle at the figure's left edge, subtitle wrapped to the width."""
     fig = ax.figure
-    fig.text(0.012, 0.975, t, ha="left", va="top", fontsize=14, fontweight=600, color=INK)
+    style = {"family": TITLE_FAMILY, "fontweight": 600} if TITLE_FAMILY else {"fontweight": "bold"}
+    fig.text(0.012, 0.975, t, ha="left", va="top", fontsize=14, color=INK, **style)
     if sub:
         width = int(fig.get_figwidth() * 11.5)
         fig.text(0.012, 0.915, textwrap.fill(sub, width), ha="left", va="top", fontsize=10.5, color=INK2,
@@ -56,14 +61,14 @@ def anomaly_trend(M):
     for _, g in s.groupby("region"):
         ax.plot(g.vintage, g.gst_anom, color=RULE, lw=0.8)
     m = s.groupby("vintage").gst_anom.mean()
-    ax.plot(m.index, m.values, color=CLARET, lw=2.4, label="Mean of 60 regions")
+    ax.plot(m.index, m.values, color=CLARET, lw=2.4, label=f"Mean of {s.region.nunique()} regions")
     ax.axhline(0, color=EDGE, lw=0.8)
     ax.axvspan(1999.5, 2016.5, color=OLIVE, alpha=0.08, lw=0)
     ax.text(2008, ax.get_ylim()[1] * 0.92, "vintages analyzed", ha="center", color=OLIVE, fontsize=10)
     ax.set_xlabel("Vintage")
     ax.set_ylabel("Growing-season temperature\nminus the 1991-2020 normal (°C)")
     title(ax, "Growing seasons warmed over the record",
-          f"Each grey line is one region. Fitted trend of the mean: {M['eda']['warming_per_decade_1991_2020']:+.2f} °C per decade.")
+          f"Each gray line is one region. Fitted trend of the mean: {M['eda']['warming_per_decade_1991_2020']:+.2f} °C per decade.")
     ax.legend(frameon=False, loc="upper left")
     finish(fig, "01_anomaly_trend.png", 0.84)
 
@@ -143,7 +148,7 @@ def world_map():
     cb = fig.colorbar(sc, ax=ax, orientation="horizontal", fraction=0.04, pad=0.02, aspect=40)
     cb.set_label("Normal growing-season temperature, 1991-2020 (°C)")
     cb.outline.set_edgecolor(EDGE)
-    title(ax, "The 60 regions, colored by their normal growing season",
+    title(ax, f"The {len(n)} regions, colored by their normal growing season",
           f"One ERA5-Land point per region. California holds {n.region.str.startswith('US / California').sum()} of them, so its dots overlap.")
     finish(fig, "04_map.png", 0.86)
 
@@ -161,6 +166,9 @@ def robustness(M):
     rows = [(lab, [(mm[k]["coefs"][c]["b"], mm[k]["coefs"][c]["lo"], mm[k]["coefs"][c]["hi"]),
                    (mm[k]["coefs"][w]["b"], mm[k]["coefs"][w]["lo"], mm[k]["coefs"][w]["hi"])])
             for lab, k, c, w in specs]
+    (RES / "robustness_specs.json").write_text(json.dumps(
+        [{"label": lab, "model": k, "cool": [b for b in r[0]], "warm": [b for b in r[1]]}
+         for (lab, k, _, _), (_, r) in zip(specs, rows)], indent=1))
     fig, ax = plt.subplots(figsize=(8.6, 5.4))
     dot_rows(ax, rows, [OLIVE, CLARET], offsets=[0.14, -0.14])
     ax.plot([], [], "o-", color=OLIVE, label="Regions below 17 °C")

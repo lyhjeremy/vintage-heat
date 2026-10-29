@@ -86,6 +86,8 @@ def fetch(regs, hemi, year, spent):
 
 
 def main():
+    # every row, including the five regions excluded on 2026-10-29, so the request
+    # layout matches the cached responses; build_weather.py keeps only included ones
     regions = pd.read_csv(ROOT / "data/regions.csv")
     frames = []
     # count requests already made in the last hour (from cache file times) against the budget

@@ -1,7 +1,7 @@
 /* Vintage explorer. Works under the landing page tokens (--signal, --ink-2) and the
    overview builder's (--accent, --ink2) through fallbacks. */
 .explorer { margin: 30px 0 0; border: 1px solid var(--edge, var(--rule)); background: var(--panel, var(--card)); padding: 20px 22px 18px; text-align: left; }
-.explorer h3 { font-family: var(--font-display, var(--display)); font-weight: 600; font-size: 27px; line-height: 1.1; margin: 0 0 4px; text-align: center; }
+.explorer h2, .explorer h3 { font-family: var(--font-display, var(--display)); font-weight: 600; font-size: 27px; line-height: 1.1; margin: 0 0 4px; text-align: center; }
 .explorer .ex-sub { font-family: var(--font-display, var(--display)); font-style: italic; font-weight: 500; font-size: 18px; color: var(--ink-2, var(--ink2)); text-align: center; margin: 0 0 16px; }
 .ex-controls { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: flex-end; }
 .ex-seg { display: flex; border: 1px solid var(--edge, var(--muted)); }

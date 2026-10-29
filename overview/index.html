@@ -4,13 +4,12 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Vintage Heat: does a hot growing season make better wine?</title>
-<meta name="description" content="62,348 Wine Enthusiast reviews from 60 regions joined to ERA5-Land growing-season weather. A season 1 °C warmer than the region's normal moved scores by +0.23 points in cool regions and +0.08 in warm ones, and the effect never turned negative." />
+<meta name="description" content="55,597 Wine Enthusiast reviews from 55 regions joined to ERA5-Land growing-season weather. A season 1 °C warmer than the region's normal moved scores by +0.24 points in cool regions and +0.08 in warm ones; no group showed a significant negative effect." />
 <meta name="theme-color" content="#F1ECE3" />
 <meta property="og:title" content="Vintage Heat" />
-<meta property="og:description" content="Does a hot growing season make better wine, or only in cool places? 62,348 reviews, 60 regions, thirty years of weather." />
+<meta property="og:description" content="Does a hot growing season make better wine, or only in cool places? 55,597 reviews, 55 regions, thirty years of weather." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lyhjeremy.github.io/vintage-heat/overview/" />
-<link href="" rel="stylesheet" />
 <style>
   :root {
     --paper: #F1ECE3;
@@ -262,13 +261,13 @@
   </header>
 
   <section class="hero">
-    <p class="kicker">62,348 reviews, 60 regions, vintages 2000 to 2016</p>
+    <p class="kicker">55,597 reviews, 55 regions, vintages 2000 to 2016</p>
     <h1>An extra degree of summer is worth a fraction of a point</h1>
     <p class="hero-sub">
       A growing season 1 °C warmer than a region's normal moved Wine Enthusiast scores by
-      <strong>+0.23 points</strong> in cool regions and <strong>+0.08 points</strong> in
+      <strong>+0.24 points</strong> in cool regions and <strong>+0.08 points</strong> in
       warm ones. The question was whether heat helps cool places and hurts warm ones. It helped
-      the cool ones a little, and it did not hurt the warm ones; the gap between the two is not
+      the cool ones a little, and no group shows a significant negative effect; the gap between the two is not
       statistically clear, and the checks weaken even the cool-region estimate.
     </p>
     <div class="cta-row">
@@ -277,24 +276,24 @@
     </div>
     <div class="claims">
       <div class="claim">
-        <div class="n">+0.23</div>
-        <p>points per 1 °C in the 17 regions with a normal season below 17 °C
-           (95% interval 0.01 to 0.45, p = 0.041).</p>
+        <div class="n">+0.24</div>
+        <p>points per 1 °C in the 16 regions with a normal season below 17 °C
+           (95% interval 0.02 to 0.47, p = 0.035).</p>
       </div>
       <div class="claim">
         <div class="n">+0.08</div>
-        <p>points per 1 °C in the 43 regions at 17 °C and above (−0.07 to 0.22,
-           p = 0.29). No sign of heat lowering scores.</p>
+        <p>points per 1 °C in the 39 regions at 17 °C and above (−0.07 to 0.23,
+           p = 0.29). No significant negative effect.</p>
       </div>
       <div class="claim">
-        <div class="n">+0.12</div>
+        <div class="n">+0.13</div>
         <p>points for next year's weather, a placebo that should be zero, in the cool group
-           (p = 0.29).</p>
+           (p = 0.28).</p>
       </div>
       <div class="claim">
-        <div class="n">1.6%</div>
+        <div class="n">1.5%</div>
         <p>smaller error predicting a held-out vintage's scores once weather is added
-           (1.301 to 1.280 points).</p>
+           (1.313 to 1.293 points).</p>
       </div>
     </div>
   </section>
@@ -312,8 +311,8 @@
       weather, with great vintages in years when the growing season is warm, August and
       September are dry and the previous winter wet. Jones, White, Cooper and Storchmann (2005)
       found that vintage ratings in most European regions rose with growing-season temperature,
-      and that for twelve regions or wine categories a quadratic fit had an optimum, beyond
-      which warmer seasons scored lower.
+      and for some regions modeled an optimum growing-season temperature, beyond which
+      warmer seasons scored lower.
     </p>
     <p>
       If the optimum idea holds across regions, an extra degree should help a cool place
@@ -324,35 +323,38 @@
   </section>
   <section class="stop">
     <p class="eyebrow">Data</p>
-    <h2>Sixty regions, seventeen vintages, one weather point each</h2>
+    <h2>Fifty-five regions, seventeen vintages, one weather point each</h2>
     <p>
       The reviews are the public <code>winemag-data-130k-v2</code> set of 129,971
       Wine Enthusiast reviews, the same file as the
       <a href="https://lyhjeremy.github.io/wine-score-inflation/">wine score inflation</a> study.
-      The vintage is the first year in each wine's title; 125,322 reviews carry one.
-      A region is the review's appellation (<code>country / province / region_1</code>, or the
-      province where the appellation field is empty), and it is kept if it has at least 400
-      reviews and 10 vintages between 2000 and 2016. 7 labels that pass the counts
+      The file holds 9,983 exact duplicate rows, which are dropped. The vintage is the first
+      four-digit number from 1950 to 2017 in each wine's title; 115,694 of the remaining
+      reviews carry one. A region is the review's <code>country / province / region_1</code> label
+      (or the province where <code>region_1</code> is empty), and it is kept if it has at least 400
+      reviews and 10 vintages between 2000 and 2016. 5 labels that pass the counts
       but cover more than one climate, such as "California" and "Toscana", are dropped. That
-      leaves 60 regions and 62,348 reviews, a list frozen in
-      <code>data/regions.csv</code> before any weather was fetched.
+      leaves 55 regions and 55,597 reviews, a list in
+      <code>data/regions.csv</code>. The list was frozen before any weather was fetched and
+      re-frozen on 29 October 2026, when dropping the duplicate rows took 5 of the
+      original 60 regions below 400 reviews; the rule did not change.
     </p>
     <p>
-      Each region gets one point: the appellation's coordinates on Wikipedia, or its main wine
-      town where the appellation page has none. Weather is ERA5-Land reanalysis from the
+      Each region gets one point: the coordinates of its Wikipedia page (an AVA's page where it has
+      coordinates, otherwise the region's main wine town). Weather is ERA5-Land reanalysis from the
       Open-Meteo archive: daily highs and lows over the growing season (April to October
       in the north, October to April in the south). Open-Meteo returns no rain for ERA5-Land,
       so harvest rain comes from ERA5, the coarser reanalysis that drives it. As a check on the points, the terrain
       elevation Open-Meteo uses at each one was compared with the elevation its source gives.
-      57 points fall within 300 m; 3 sources give no elevation; one
+      52 points fall within 300 m; 3 sources give no elevation; one
       point, the Santa Barbara County centroid, sat at 888 m in the mountains and was moved
       to Los Alamos, between the Santa Maria and Santa Ynez valleys.
     </p>
     <figure>
       <div class="plate"><img width="2000" height="1000" src="../figures/04_map.png" loading="lazy"
-        alt="World map with 60 dots: most in California, Oregon and Washington, the rest in France, Italy, Spain, Portugal, Germany, Austria, Chile, Argentina, South Africa and New Zealand. Normal growing-season temperatures run from 14.6 °C in Dundee Hills to 21.3 °C in Rutherford." /></div>
-      <figcaption>The 60 regions, colored by their 1991-2020 growing-season mean temperature,
-        from 14.6 °C (Dundee Hills) to 21.3 °C (Rutherford).
+        alt="World map with 55 dots: most in California, Oregon and Washington, the rest in France, Italy, Spain, Portugal, Germany, Austria, Chile, Argentina and New Zealand. Normal growing-season temperatures run from 14.6 °C in Dundee Hills to 21.0 °C in Santa Lucia Highlands." /></div>
+      <figcaption>The 55 regions, colored by their 1991-2020 growing-season mean temperature,
+        from 14.6 °C (Dundee Hills) to 21.0 °C (Santa Lucia Highlands).
         Drawn by <code>scripts/make_figures.py</code> on Natural Earth land outlines.</figcaption>
     </figure>
   </section>
@@ -382,7 +384,7 @@
     </p>
     <figure>
       <div class="plate"><img width="1720" height="920" src="../figures/01_anomaly_trend.png" loading="lazy"
-        alt="Growing-season temperature anomalies for 60 regions from 1991 to 2020, rising at about 0.40 °C per decade on average." /></div>
+        alt="Growing-season temperature anomalies for 55 regions from 1991 to 2020, rising at about 0.40 °C per decade on average." /></div>
       <figcaption>Each region's season against its 1991-2020 normal. The year fixed effects take
         out the common rise, so it cannot pass for a weather effect.</figcaption>
     </figure>
@@ -390,36 +392,38 @@
 
   <section class="stop stop--key">
     <p class="eyebrow">Result</p>
-    <h2>Cool places gain a little more, and nowhere loses</h2>
-    <div class="bignum">+0.23</div>
+    <h2>Cool places gain a little more, and no group loses significantly</h2>
+    <div class="bignum">+0.24</div>
     <p class="bignum-note">points per 1 °C warmer season, regions below 17 °C normal</p>
     <p>
-      In the 17 regions below 17 °C, a season 1 °C warmer than normal moved
-      scores by <strong>+0.23</strong> points (95% interval 0.01 to 0.45, p = 0.041). In the
-      43 regions at 17 °C and above it moved them by <strong>+0.08</strong>
-      (−0.07 to 0.22, p = 0.29). The difference, −0.15 points, has a p-value of p = 0.18.
-      Treating normal GST as continuous gives +0.14 points per degree at 17 °C and
-      a change of −0.01 for each degree of warmer normal (p = 0.76): no detectable
+      In the 16 regions below 17 °C, a season 1 °C warmer than normal moved
+      scores by <strong>+0.24</strong> points (95% interval 0.02 to 0.47, p = 0.035). In the
+      39 regions at 17 °C and above it moved them by <strong>+0.08</strong>
+      (−0.07 to 0.23, p = 0.29). The difference, −0.16 points, has a p-value of p = 0.16.
+      Treating normal GST as continuous gives +0.15 points per degree at 17 °C and
+      a change of −0.02 for each degree of warmer normal (p = 0.64): no detectable
       slope.
     </p>
     <p>
-      Jones's four bands tell the same story without a clean gradient: cool +0.26
-      (3 regions, p = 0.002), intermediate +0.23
-      (14, p = 0.078), warm −0.01 (22,
-      p = 0.83) and hot +0.19 (21, p = 0.10). The cool band's
-      small interval rests on three regions (Dundee Hills, Santa Cruz Mountains and
-      Marlborough), too few clusters for a reliable standard error.
+      Jones's four bands tell the same story without a clean gradient: cool +0.24
+      (3 regions, p = 0.003), intermediate +0.25
+      (13, p = 0.063), warm 0.00 (20,
+      p = 0.99) and hot +0.18 (19, p = 0.14). The cool band's
+      small interval rests on three regions (Dundee Hills, Marlborough and Santa Cruz Mountains), too few clusters
+      for a reliable standard error. The warm band is flat, and 29 of the
+      55 regions taken one at a time slope downward, so the data do not rule out a
+      small negative effect in some warm places.
     </p>
     <p>
-      For scale: review scores here have a standard deviation of 3.0 points, and a
+      For scale: review scores here have a standard deviation of 3.1 points, and a
       typical season is 0.60 °C off its normal, which moves a cool region's scores by
-      about +0.14 points. Degree days give the same split (+0.14 and +0.04
+      about +0.15 points. Degree days give the same split (+0.14 and +0.04
       points per 100 degree days). Days above 35 °C add nothing once the mean is in the model
-      (−0.012 and −0.001 points per extra hot day).
+      (−0.023 and −0.001 points per extra hot day).
     </p>
     <figure>
       <div class="plate"><img width="1720" height="880" src="../figures/02_band_effects.png" loading="lazy"
-        alt="Dot and interval chart: +0.23 points per degree below 17 °C with an interval just above zero, +0.08 above 17 °C with an interval spanning zero, and four Jones bands, three of whose intervals span zero." /></div>
+        alt="Dot and interval chart: +0.24 points per degree below 17 °C with an interval just above zero, +0.08 above 17 °C with an interval spanning zero, and four Jones bands, three of whose intervals span zero." /></div>
       <figcaption>Points per 1 °C warmer season than the region's normal, with 95% intervals
         clustered by region. From <code>results/models.json</code>, models <code>two_group</code>
         and <code>four_band</code>.</figcaption>
@@ -433,8 +437,8 @@
       Pick a region. Each dot is one vintage: across, how far the season ran from normal; up,
       the vintage's average score after removing the region's average, the year's average
       across all regions, and each review's variety and taster. The line is the model's
-      estimate for the region's group. Single regions are noisy: 30 of the
-      60 show a rising slope on their own and 30 a falling one.
+      estimate for the region's group. Single regions are noisy: 26 of the
+      55 show a rising slope on their own and 29 a falling one.
     </p>
     <section class="explorer" data-explorer data-src="../assets/data.json" aria-labelledby="ex-h">
       <h3 id="ex-h">Vintage explorer</h3>
@@ -443,8 +447,8 @@
       <div class="ex-body" hidden>
         <div class="ex-controls">
           <div class="ex-seg" role="group" aria-label="Climate group">
-            <button type="button" data-group="cool" aria-pressed="true">Below 17 °C (17)</button>
-            <button type="button" data-group="warm" aria-pressed="false">17 °C and above (43)</button>
+            <button type="button" data-group="cool" aria-pressed="true">Below 17 °C (16)</button>
+            <button type="button" data-group="warm" aria-pressed="false">17 °C and above (39)</button>
           </div>
           <div class="ex-pick">
             <label for="ex-region">Region (normal season temperature)</label>
@@ -470,14 +474,14 @@
     <h2>The placebo is not quite zero, and region trends erase it</h2>
     <p>
       Next year's weather cannot change this year's wine. Put in place of the real season, it
-      gives +0.12 points in the cool group (p = 0.29) and +0.05 in the warm
-      group (p = 0.42); next year's harvest rain gives +0.10 (p = 0.082). None is
+      gives +0.13 points in the cool group (p = 0.28) and +0.05 in the warm
+      group (p = 0.38); next year's harvest rain gives +0.12 (p = 0.071). None is
       significant, but the cool-group placebo is about half the real estimate. Seasons are
       correlated from one year to the next within a region, so part of the real estimate may be
       a region running warm and well-reviewed for several years at once rather than the
       season itself. With both seasons in the model at once, the real one keeps
-      +0.20 points in the cool group (p = 0.029) and next year's takes +0.09
-      (p = 0.31).
+      +0.21 points in the cool group (p = 0.024) and next year's takes +0.09
+      (p = 0.30).
     </p>
     <figure>
       <div class="plate"><img width="1720" height="760" src="../figures/03_placebo.png" loading="lazy"
@@ -487,25 +491,27 @@
     </figure>
     <p>
       The other checks pull in both directions. Separate linear trends for each region in
-      place of the year effects shrink both estimates to +0.10 (p = 0.26) and
-      +0.03 (p = 0.69). Adding log price raises them to +0.24 (p = 0.002) and +0.14 (p = 0.033); price
-      partly records a vintage's reputation, so holding it fixed changes what is being
-      compared. Region-vintage averages weighted by review count give +0.28 and
-      +0.15; unweighted they give +0.16 and +0.23, the only version in
+      place of the year effects shrink both estimates to +0.09 (p = 0.28) and
+      +0.03 (p = 0.74). On the 52,920 reviews that carry a price, the main model gives
+      +0.28 and +0.09; adding log price moves these to +0.25
+      (p = 0.002) and +0.14 (p = 0.041). If price carried a vintage's
+      reputation, controlling for it should shrink both. The cool estimate falls
+      slightly and the warm one rises, so price does not explain the effect away. Region-vintage averages weighted by review count give +0.30 and
+      +0.16; unweighted they give +0.20 and +0.21, the only version in
       which warm regions come out ahead. Dropping one region at a time moves the cool estimate
-      between +0.12 (without Willamette Valley) and +0.27 (without
+      between +0.13 (without Willamette Valley) and +0.28 (without
       Alsace).
     </p>
     <figure>
       <div class="plate"><img width="1720" height="1080" src="../figures/05_robustness.png" loading="lazy"
-        alt="Estimates for both groups under eight specifications. The cool-group estimate is positive in all of them, but its interval crosses zero under region trends, unweighted cell means and the placebo. The warm-group interval crosses zero in six of eight." /></div>
+        alt="Estimates for both groups under eight specifications. The cool-group estimate is positive in all of them, but its interval crosses zero under region trends, unweighted cell means and the placebo. The warm-group interval crosses zero in seven of eight." /></div>
       <figcaption>Both estimates under every check, 95% intervals clustered by region. Table
         <code>tables/model_coefficients.csv</code>.</figcaption>
     </figure>
     <p>
       Out of sample, holding out one vintage at a time and predicting each region-variety
-      average for it, the weather terms cut the error from 1.301 to 1.280
-      points, 1.6%. They did better in 12 of the 17 held-out
+      average for it, the weather terms cut the error from 1.313 to 1.293
+      points, 1.5%. They did better in 11 of the 17 held-out
       vintages. Weather explains 0.08% of the score variation left after region,
       year, variety and taster.
     </p>
@@ -523,14 +529,19 @@
     </p>
     <p>
       One reanalysis point stands in for each region's vineyards and slopes, and harvest rain
-      comes from a coarser grid than temperature. Taster and region are close to the same
-      thing: in 22 of the 60 regions one taster wrote more than 90% of
+      comes from a coarser grid than temperature. That point decides the climate band:
+      ERA5-Land puts Carneros (19.4 °C) and Russian River Valley (19.1 °C) in
+      the hot band, though both are usually called cool AVAs, and the Douro point
+      (Alijó, 609 m) sits above most Douro vineyards. The elevation check compared
+      each point with the elevation of its town or AVA page, not with the vineyards' elevation
+      as the project spec asked, so it catches gross errors only. Taster and region are close to the same
+      thing: in 22 of the 55 regions one taster wrote more than 90% of
       the reviews, so the taster effects and region effects are hard to separate. Scores sit in
-      a narrow band (mean 88.8, standard deviation 3.0), the compression the
+      a narrow band (mean 88.8, standard deviation 3.1), the compression the
       <a href="https://lyhjeremy.github.io/wine-score-inflation/">wine score inflation</a>
       study documented. The variety version of the analysis, crossing the anomaly with each
       grape's climate-maturity group, was cut: Jones's grape groupings exist only as a chart,
-      and assigning 306 varieties by reading it would have meant guessing most of
+      and assigning 302 varieties by reading it would have meant guessing most of
       them.
     </p>
   </section>

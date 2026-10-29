@@ -1,19 +1,21 @@
 """Parse the reviews into the analysis panel.
 
-1. Vintage: the first four-digit year in the title matching 19xx or 200x/201x (the
-   parse Project 16 uses), kept if it falls in 1950 to 2017.
+0. Exact duplicate rows in the source CSV (9,983 of them) are dropped on load.
+1. Vintage: the first four-digit number in the title that falls in 1950 to 2017 (the
+   spec's rule; a winery name such as "1912 Winemakers" is skipped, not taken).
 2. Region label: country / province / region_1, or country / province when region_1
    is empty.
 3. Inclusion rule, on vintages 2000 to 2016: at least 400 reviews and at least 10
    distinct vintages. Catch-all labels that span more than one climate are dropped
    (CATCH_ALL below), and the three generic Bordeaux AOC labels are merged.
-4. The set of regions that passes must equal data/regions.csv exactly, which was
-   frozen before any weather was fetched. The script stops if it does not.
+4. The set of regions that passes must equal the included rows of data/regions.csv
+   exactly. That list was frozen before any weather was fetched and re-frozen on
+   2026-10-29 after the duplicate fix (docs/decisions.md). The script stops if not.
 
 Writes data/reviews_panel.csv.gz and tables/region_inclusion.csv, and the counts to
 results/panel_counts.json.
 """
-import json, pathlib
+import json, pathlib, re
 import pandas as pd
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -37,6 +39,14 @@ MIN_REVIEWS, MIN_VINTAGES = 400, 10
 YEARS = (2000, 2016)
 
 
+def vintage(title):
+    """First four-digit number in the title between 1950 and 2017, else None."""
+    for y in re.findall(r"(?<!\d)(\d{4})(?!\d)", str(title)):
+        if 1950 <= int(y) <= 2017:
+            return int(y)
+    return None
+
+
 def label(df):
     lab = df.country + " / " + df.province + " / " + df.region_1.fillna("")
     return lab.where(df.region_1.notna(), df.country + " / " + df.province)
@@ -45,8 +55,10 @@ def label(df):
 def main():
     df = pd.read_csv(RAW, index_col=0)
     n_all = len(df)
-    df["vintage"] = df.title.str.extract(r"(19\d\d|20[01]\d)")[0].astype(float)
-    n_vintage = int(df.vintage.between(1950, 2017).sum())
+    df = df.drop_duplicates()
+    n_dupes = n_all - len(df)
+    df["vintage"] = df.title.map(vintage).astype(float)
+    n_vintage = int(df.vintage.notna().sum())
     df = df[df.vintage.between(*YEARS)].copy()
     df["vintage"] = df.vintage.astype(int)
     df["label"] = label(df)
@@ -61,6 +73,7 @@ def main():
     inc.drop(columns="passes_counts").to_csv(ROOT / "tables/region_inclusion.csv")
 
     frozen = pd.read_csv(ROOT / "data/regions.csv")
+    frozen = frozen[frozen.included]
     chosen = set(g.index[g.included])
     if chosen != set(frozen.region):
         raise SystemExit(f"region list differs from data/regions.csv: "
@@ -74,6 +87,8 @@ def main():
 
     counts = {
         "reviews_all": n_all,
+        "duplicate_rows_dropped": n_dupes,
+        "reviews_unique": n_all - n_dupes,
         "reviews_with_vintage": n_vintage,
         "reviews_2000_2016": int(len(df)),
         "labels_passing_counts": int(g.passes_counts.sum()),

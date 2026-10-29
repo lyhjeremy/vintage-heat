@@ -1,61 +1,56 @@
 region,slope,vintages,band,warm,n
-Argentina / Mendoza Province / Mendoza,-0.047,17,warm,1,2269
-Austria / Burgenland,-0.8973,16,intermediate,0,664
-Austria / Kamptal,-0.5652,16,intermediate,0,408
-Austria / Niederösterreich,-0.4426,13,intermediate,0,592
-Chile / Casablanca Valley,-0.3472,15,warm,1,588
-Chile / Colchagua Valley,-0.2155,17,hot,1,816
-Chile / Maipo Valley,-0.3616,17,hot,1,614
-Chile / Maule Valley,0.186,15,warm,1,464
-France / Alsace / Alsace,-0.3378,16,intermediate,0,2124
-France / Bordeaux / Bordeaux (generic),0.1645,16,warm,1,1447
-France / Bordeaux / Saint-Émilion,-0.0612,16,warm,1,558
-France / Burgundy / Chablis,0.3331,13,intermediate,0,558
-France / Champagne / Champagne,-0.2357,15,intermediate,0,462
-France / Loire Valley / Sancerre,0.0633,14,intermediate,0,554
-France / Provence / Côtes de Provence,0.277,15,warm,1,856
-France / Southwest France / Cahors,0.0086,14,warm,1,490
-Germany / Mosel,-0.0018,12,intermediate,0,1029
-Italy / Northeastern Italy / Alto Adige,0.6578,16,warm,1,689
-Italy / Piedmont / Barbaresco,0.2388,14,warm,1,793
-Italy / Piedmont / Barolo,0.1283,14,warm,1,1596
-Italy / Tuscany / Brunello di Montalcino,-0.3598,11,warm,1,1436
-Italy / Tuscany / Chianti Classico,-0.0272,15,warm,1,1027
-Italy / Veneto / Amarone della Valpolicella Classico,0.4363,14,warm,1,416
-New Zealand / Marlborough,0.4464,16,cool,0,793
-Portugal / Alentejano,-0.3448,14,hot,1,937
-Portugal / Douro,-0.4051,16,intermediate,0,1267
-Portugal / Lisboa,-0.1876,11,warm,1,503
-Portugal / Tejo,-0.6246,10,hot,1,665
-South Africa / Stellenbosch,0.5726,17,hot,1,418
-Spain / Northern Spain / Ribera del Duero,0.5162,17,intermediate,0,722
-Spain / Northern Spain / Rioja,0.4467,17,intermediate,0,1443
-US / California / Alexander Valley,-0.2516,16,hot,1,766
-US / California / Anderson Valley,-0.5728,16,warm,1,620
-US / California / Carneros,0.2468,16,hot,1,966
-US / California / Dry Creek Valley,0.5366,17,hot,1,905
-US / California / Edna Valley,-0.2602,15,warm,1,406
-US / California / Livermore Valley,0.3466,14,hot,1,442
-US / California / Lodi,0.3819,15,hot,1,789
-US / California / Napa Valley,0.3351,17,hot,1,4281
-US / California / Paso Robles,-0.0405,17,hot,1,2302
-US / California / Russian River Valley,0.2245,17,hot,1,3039
-US / California / Rutherford,0.6434,15,hot,1,406
-US / California / Santa Barbara County,0.1981,17,warm,1,984
-US / California / Santa Cruz Mountains,0.0402,16,cool,0,537
-US / California / Santa Lucia Highlands,-0.2871,14,hot,1,799
-US / California / Santa Maria Valley,-0.1032,16,hot,1,697
-US / California / Santa Ynez Valley,-0.2089,14,hot,1,801
-US / California / Sonoma Coast,0.2966,16,intermediate,0,1473
-US / California / Sonoma County,0.5491,17,hot,1,1138
-US / California / Sonoma Valley,0.7478,17,hot,1,616
-US / California / Sta. Rita Hills,-0.1448,13,warm,1,971
-US / New York / Finger Lakes,0.1766,17,intermediate,0,1538
-US / New York / North Fork of Long Island,-0.3724,16,warm,1,556
-US / Oregon / Dundee Hills,0.234,14,cool,0,554
-US / Oregon / Willamette Valley,0.4331,17,intermediate,0,2217
-US / Washington / Columbia Valley (WA),-0.0941,17,warm,1,4041
-US / Washington / Horse Heaven Hills,-0.0454,13,hot,1,558
-US / Washington / Red Mountain,-0.1256,14,hot,1,719
-US / Washington / Walla Walla Valley (WA),-0.1801,14,warm,1,1060
-US / Washington / Yakima Valley,0.0092,16,warm,1,969
+Argentina / Mendoza Province / Mendoza,-0.0603,17,warm,1,2121
+Austria / Burgenland,-0.9887,16,intermediate,0,599
+Austria / Niederösterreich,-0.3671,13,intermediate,0,534
+Chile / Casablanca Valley,-0.3294,15,warm,1,555
+Chile / Colchagua Valley,-0.2031,17,hot,1,767
+Chile / Maipo Valley,-0.4103,17,hot,1,569
+Chile / Maule Valley,0.2382,15,warm,1,425
+France / Alsace / Alsace,-0.3497,16,intermediate,0,1938
+France / Bordeaux / Bordeaux (generic),0.2245,16,warm,1,1338
+France / Bordeaux / Saint-Émilion,-0.0733,16,warm,1,530
+France / Burgundy / Chablis,0.3759,13,intermediate,0,514
+France / Champagne / Champagne,-0.239,15,intermediate,0,440
+France / Loire Valley / Sancerre,-0.0506,14,intermediate,0,500
+France / Provence / Côtes de Provence,0.3559,15,warm,1,764
+France / Southwest France / Cahors,-0.0314,14,warm,1,449
+Germany / Mosel,0.0633,12,intermediate,0,935
+Italy / Northeastern Italy / Alto Adige,0.6887,16,warm,1,628
+Italy / Piedmont / Barbaresco,0.2444,14,warm,1,739
+Italy / Piedmont / Barolo,0.1677,14,warm,1,1490
+Italy / Tuscany / Brunello di Montalcino,-0.3368,11,warm,1,1303
+Italy / Tuscany / Chianti Classico,-0.0666,15,warm,1,931
+New Zealand / Marlborough,0.4577,16,cool,0,713
+Portugal / Alentejano,-0.2576,14,hot,1,862
+Portugal / Douro,-0.4125,16,intermediate,0,1173
+Portugal / Lisboa,-0.363,11,warm,1,458
+Portugal / Tejo,-0.6465,10,hot,1,617
+Spain / Northern Spain / Ribera del Duero,0.5224,17,intermediate,0,663
+Spain / Northern Spain / Rioja,0.4367,17,intermediate,0,1323
+US / California / Alexander Valley,-0.2184,16,hot,1,714
+US / California / Anderson Valley,-0.5549,16,warm,1,571
+US / California / Carneros,0.2815,16,hot,1,898
+US / California / Dry Creek Valley,0.5497,17,hot,1,836
+US / California / Livermore Valley,0.3931,14,hot,1,411
+US / California / Lodi,0.3993,15,hot,1,742
+US / California / Napa Valley,0.3576,17,hot,1,3980
+US / California / Paso Robles,-0.0499,17,hot,1,2107
+US / California / Russian River Valley,0.2164,17,hot,1,2810
+US / California / Santa Barbara County,0.2561,17,warm,1,902
+US / California / Santa Cruz Mountains,0.0542,16,cool,0,500
+US / California / Santa Lucia Highlands,-0.3186,14,hot,1,734
+US / California / Santa Maria Valley,-0.171,16,hot,1,661
+US / California / Santa Ynez Valley,-0.2141,14,hot,1,730
+US / California / Sonoma Coast,0.3181,16,intermediate,0,1373
+US / California / Sonoma County,0.5377,17,hot,1,1057
+US / California / Sonoma Valley,0.6886,17,hot,1,575
+US / California / Sta. Rita Hills,-0.1535,13,warm,1,901
+US / New York / Finger Lakes,0.1634,17,intermediate,0,1420
+US / New York / North Fork of Long Island,-0.3701,16,warm,1,493
+US / Oregon / Dundee Hills,0.1849,14,cool,0,508
+US / Oregon / Willamette Valley,0.4612,17,intermediate,0,2029
+US / Washington / Columbia Valley (WA),-0.0944,17,warm,1,3714
+US / Washington / Horse Heaven Hills,-0.0595,13,hot,1,513
+US / Washington / Red Mountain,-0.1039,14,hot,1,661
+US / Washington / Walla Walla Valley (WA),-0.1377,14,warm,1,990
+US / Washington / Yakima Valley,0.0246,16,warm,1,889

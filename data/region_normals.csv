@@ -1,7 +1,6 @@
 region,gst_normal,gdd_normal,heat_days_normal,harvest_rain_normal,gst_sd,band,om_elevation_m,hemisphere,lat,lon
 Argentina / Mendoza Province / Mendoza,18.408,1795.612,0.567,99.007,0.93,warm,924.0,S,-32.998,-68.873
 Austria / Burgenland,16.631,1486.773,0.8,111.12,0.869,intermediate,160.0,N,47.95,16.85
-Austria / Kamptal,15.395,1252.673,0.133,112.903,0.813,intermediate,248.0,N,48.467,15.683
 Austria / Niederösterreich,15.508,1270.327,0.0,122.263,0.789,intermediate,224.0,N,48.417,15.617
 Chile / Casablanca Valley,17.53,1598.502,0.0,20.097,0.444,warm,260.0,S,-33.317,-71.417
 Chile / Colchagua Valley,19.588,2035.5,0.6,48.987,0.545,hot,167.0,S,-34.637,-71.363
@@ -21,26 +20,22 @@ Italy / Piedmont / Barbaresco,18.042,1743.923,0.8,169.703,0.66,warm,271.0,N,44.7
 Italy / Piedmont / Barolo,17.003,1541.838,0.4,219.227,0.691,warm,389.0,N,44.617,7.933
 Italy / Tuscany / Brunello di Montalcino,17.05,1545.452,0.433,171.837,0.696,warm,565.0,N,43.05,11.483
 Italy / Tuscany / Chianti Classico,18.101,1752.008,1.067,205.763,0.72,warm,236.0,N,43.583,11.317
-Italy / Veneto / Amarone della Valpolicella Classico,17.924,1717.732,0.2,215.993,0.691,warm,260.0,N,45.533,10.933
 New Zealand / Marlborough,14.8,1029.193,0.0,120.0,0.584,cool,4.0,S,-41.514,173.96
 Portugal / Alentejano,20.594,2267.882,19.5,108.987,0.794,hot,270.0,N,38.567,-7.9
 Portugal / Douro,16.566,1445.9,1.2,144.14,0.777,intermediate,609.0,N,41.276,-7.475
 Portugal / Lisboa,18.28,1771.997,0.0,111.45,0.469,warm,96.0,N,39.083,-9.267
 Portugal / Tejo,19.801,2097.712,10.9,112.54,0.668,hot,105.0,N,39.234,-8.686
-South Africa / Stellenbosch,20.572,2244.193,9.367,76.797,0.547,hot,113.0,S,-33.937,18.861
 Spain / Northern Spain / Ribera del Duero,16.794,1517.13,3.867,81.0,0.902,intermediate,823.0,N,41.683,-3.683
 Spain / Northern Spain / Rioja,16.181,1368.447,2.1,98.723,0.736,intermediate,452.0,N,42.583,-2.85
 US / California / Alexander Valley,20.312,2210.812,18.067,48.42,0.728,hot,58.0,N,38.689,-122.876
 US / California / Anderson Valley,17.285,1571.912,0.867,55.053,0.633,warm,191.0,N,39.087,-123.456
 US / California / Carneros,19.443,2023.287,11.367,29.413,0.717,hot,49.0,N,38.254,-122.403
 US / California / Dry Creek Valley,20.282,2204.49,17.767,48.42,0.728,hot,62.0,N,38.666,-122.928
-US / California / Edna Valley,18.637,1849.165,0.833,19.663,0.605,warm,89.0,N,35.217,-120.608
 US / California / Livermore Valley,19.436,2023.028,10.267,22.717,0.756,hot,175.0,N,37.673,-121.737
 US / California / Lodi,20.764,2305.437,18.067,34.017,0.763,hot,33.0,N,38.016,-121.027
 US / California / Napa Valley,20.371,2221.992,18.367,30.03,0.748,hot,103.0,N,38.401,-122.33
 US / California / Paso Robles,20.477,2244.86,19.5,16.797,0.716,hot,249.0,N,35.607,-120.608
 US / California / Russian River Valley,19.132,1958.022,8.8,37.343,0.692,hot,32.0,N,38.519,-122.844
-US / California / Rutherford,21.255,2410.555,27.167,34.71,0.751,hot,55.0,N,38.459,-122.423
 US / California / Santa Barbara County,18.409,1801.325,0.9,17.51,0.685,warm,177.0,N,34.742,-120.275
 US / California / Santa Cruz Mountains,14.858,1077.442,0.167,32.1,0.685,cool,640.0,N,37.302,-122.115
 US / California / Santa Lucia Highlands,21.025,2361.673,29.833,22.777,0.859,hot,96.0,N,36.434,-121.42

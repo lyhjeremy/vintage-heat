@@ -28,6 +28,22 @@ def pv(p):
     return f"p = {p:.3f}" if p < 0.1 else f"p = {p:.2f}"
 
 
+ONES = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen".split()
+TENS = {2: "twenty", 3: "thirty", 4: "forty", 5: "fifty", 6: "sixty", 7: "seventy", 8: "eighty", 9: "ninety"}
+
+
+def words(k):
+    """Spell out 0 to 99."""
+    if k < 20:
+        return ONES[k]
+    t, o = divmod(k, 10)
+    return TENS[t] + ("" if o == 0 else "-" + ONES[o])
+
+
+def direction(new, old):
+    return "rises" if new > old else "falls"
+
+
 def put(n, key, c, d=2):
     n[key] = sg(c["b"], d)
     n[key + "Abs"] = f"{abs(c['b']):.{d}f}"
@@ -122,6 +138,48 @@ def main():
     # size in context: one standard deviation of the season anomaly
     n["coolPerSd"] = sg(t["gst_cool"]["b"] * e["gst_anom_sd_panel"])
     n["warmPerSd"] = sg(t["gst_warm"]["b"] * e["gst_anom_sd_panel"])
+
+    # counts and words that the copy would otherwise type by hand
+    cells = pd.read_csv(RES / "region_vintage_cells.csv")
+    n["nVintagesPanel"] = int(cells.vintage.nunique())
+    n["nRegionsWord"] = words(C["regions"]).capitalize()
+    n["nRegionsWordLower"] = words(C["regions"])
+    n["nVintagesWord"] = words(int(cells.vintage.nunique()))
+    n["nDupes"] = f"{C['duplicate_rows_dropped']:,}"
+    n["nUnique"] = f"{C['reviews_unique']:,}"
+    frozen = pd.read_csv(ROOT / "data/regions.csv")
+    n["nExcluded"] = int((~frozen.included).sum())
+    n["nFirstFreeze"] = len(frozen)
+    rs = json.loads((RES / "robustness_specs.json").read_text())
+    n["nSpecs"] = len(rs)
+    n["nSpecsWord"] = words(len(rs))
+    short = {"two_group": "the main model", "region_trends": "region trends", "with_price": "the price control",
+             "cell_weighted": "weighted cell means", "cell_unweighted": "unweighted cell means",
+             "named_tasters": "named tasters only", "north_only": "the northern hemisphere only",
+             "placebo_next_only": "the placebo"}
+    crossc = [short[r["model"]] for r in rs if r["cool"][1] < 0 < r["cool"][2]]
+    n["coolCrossCount"] = words(len(crossc))
+    n["coolCrossList"] = (", ".join(crossc[:-1]) + " and " + crossc[-1]) if len(crossc) > 1 else "".join(crossc)
+    n["warmCrossCountWord"] = words(sum(r["warm"][1] < 0 < r["warm"][2] for r in rs))
+    n["coolAllPositive"] = "positive in all of them" if all(r["cool"][0] > 0 for r in rs) else "not positive in all of them"
+    # price: compare with and without price on the same reviews (those with a price)
+    ps, wp = mm["two_group_price_sample"]["coefs"], mm["with_price"]["coefs"]
+    n["priceCoolDir"] = direction(wp["gst_cool"]["b"], ps["gst_cool"]["b"])
+    n["priceWarmDir"] = direction(wp["gst_warm"]["b"], ps["gst_warm"]["b"])
+    # band caveat
+    nrm = pd.read_csv(ROOT / "data/region_normals.csv").set_index("region")
+    for key, r in [("carneros", "US / California / Carneros"), ("rrv", "US / California / Russian River Valley")]:
+        n[key + "Gst"] = f"{nrm.loc[r, 'gst_normal']:.1f}"
+        n[key + "Band"] = nrm.loc[r, "band"]
+    ec = pd.read_csv(ROOT / "tables/elevation_check.csv").set_index("region")
+    n["douroPointElev"] = f"{ec.loc['Portugal / Douro', 'om_elevation_m']:.0f}"
+    cb = sorted(r.split(" / ")[-1] for r in nrm.index[nrm.band == "cool"])
+    n["coolBandRegions"] = (", ".join(cb[:-1]) + " and " + cb[-1]) if len(cb) > 1 else "".join(cb)
+    n["coolBandCountWord"] = words(len(cb))
+    order = ["US", "France", "Italy", "Spain", "Portugal", "Germany", "Austria", "Chile", "Argentina", "South Africa", "New Zealand"]
+    cs = [c for c in order if c in set(frozen[frozen.included].country)]
+    n["countriesNonUs"] = ", ".join(cs[1:-1]) + " and " + cs[-1]
+    n["bandWarmNeg"] = "negative" if mm["four_band"]["coefs"]["gst_b_warm"]["b"] < 0 else "positive"
 
     (RES / "numbers.json").write_text(json.dumps(n, indent=1, ensure_ascii=False))
     (ROOT / "site").mkdir(exist_ok=True)
