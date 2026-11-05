@@ -254,6 +254,13 @@
   .refs dt { font-family: var(--sans); font-weight: 600; font-size: 16px; color: var(--ink); margin-top: 14px; }
   .refs dd { margin: 3px 0 0; font-size: 16px; color: var(--ink2); }
   .explorer { margin-top: 26px; }
+  .cellarbook { margin: 34px 0 0; border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); padding: 12px 0 6px; text-align: left; }
+  .cellarbook h2 { font-family: var(--mono); font-weight: 600; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 6px; max-width: none; }
+  .cellarbook table { width: 100%; min-width: 0; border-collapse: collapse; }
+  .cellarbook th { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 19px; color: var(--accent); text-transform: none; letter-spacing: 0; text-align: left; vertical-align: top; padding: 8px 18px 8px 0; width: 9.5rem; border-top: 1px solid var(--rule); }
+  .cellarbook td { font-family: var(--serif); font-size: 16px; line-height: 1.5; color: var(--ink); padding: 9px 0 8px; border-top: 1px solid var(--rule); }
+  .cellarbook th, .cellarbook td { border-bottom: 0; }
+  @media (max-width: 560px) { .cellarbook table, .cellarbook tbody, .cellarbook tr, .cellarbook th, .cellarbook td { display: block; width: auto; } .cellarbook td { border-top: 0; padding-top: 0; } }
 </style>
 </head>
 <body>
@@ -271,9 +278,10 @@
     <p class="hero-sub">
       A growing season 1 °C warmer than a region's normal moved Wine Enthusiast scores by
       <strong>+0.24 points</strong> in cool regions and <strong>+0.08 points</strong> in
-      warm ones. The question was whether heat helps cool places and hurts warm ones. It helped
-      the cool ones a little, and no group shows a significant negative effect; the gap between the two is not
-      statistically clear, and the checks weaken even the cool-region estimate.
+      warm ones, against a score standard deviation of 3.1. The idea under test was
+      that heat helps cool places and hurts warm ones. It helped the cool ones a little and
+      hurt no group significantly, but the gap between the groups is not statistically clear,
+      and with region trends in the model the cool estimate falls to +0.09 (p = 0.28).
     </p>
     <div class="cta-row">
       <a class="btn btn-primary" href="../">Explore each region</a>
@@ -301,6 +309,19 @@
            (1.313 to 1.293 points).</p>
       </div>
     </div>
+    <section class="cellarbook" aria-labelledby="vh-glance">
+      <h2 id="vh-glance">At a glance</h2>
+      <table>
+        <tbody>
+          <tr><th scope="row">Question</th><td>Does a season warmer than a region's normal raise critic scores, and does the effect turn negative in warm regions?</td></tr>
+          <tr><th scope="row">Data</th><td>55,597 reviews in 55 regions, vintages 2000 to 2016, joined to ERA5-Land season temperature and ERA5 harvest rain against each region's 1991-2020 normal. Region list frozen in <code>data/regions.csv</code> before any weather was fetched.</td></tr>
+          <tr><th scope="row">Method</th><td>Review-level regression with region, vintage-year, variety and taster fixed effects; errors clustered by region.</td></tr>
+          <tr><th scope="row">Checks</th><td>Placebo with next year's season: +0.13 cool (p = 0.28), +0.05 warm (p = 0.38). Holding out one vintage at a time against a baseline of each region-variety's mean from the other vintages: error 1.313 to 1.293 points (1.5% lower, better in 11 of 17 vintages).</td></tr>
+          <tr><th scope="row">Result</th><td>Per 1 °C: +0.24 below 17 °C (0.02 to 0.47), +0.08 at 17 °C and above (−0.07 to 0.23). Difference −0.16 (p = 0.16). Weather explains 0.08% of the variation left after the fixed effects.</td></tr>
+          <tr><th scope="row">Main limitation</th><td>Tasters know the vintage, so scores can carry its reputation; one weather point stands in for each region.</td></tr>
+        </tbody>
+      </table>
+    </section>
   </section>
 </div>
 
@@ -404,7 +425,7 @@
       In the 16 regions below 17 °C, a season 1 °C warmer than normal moved
       scores by <strong>+0.24</strong> points (95% interval 0.02 to 0.47, p = 0.035). In the
       39 regions at 17 °C and above it moved them by <strong>+0.08</strong>
-      (−0.07 to 0.23, p = 0.29). The difference, −0.16 points, has a p-value of p = 0.16.
+      (−0.07 to 0.23, p = 0.29). The difference, −0.16 points, is not significant (p = 0.16).
       Treating normal GST as continuous gives +0.15 points per degree at 17 °C and
       a change of −0.02 for each degree of warmer normal (p = 0.64): no detectable
       slope.

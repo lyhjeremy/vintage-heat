@@ -6,7 +6,7 @@
  "og_title": "Vintage Heat",
  "og_description": "Does a hot growing season make better wine, or only in cool places? {{nPanel}} reviews, {{nRegions}} regions, thirty years of weather.",
  "family": "cellar",
- "extra_css": "\n  .stop .tablewrap table { min-width: 520px; }\n  td.num, th.num { text-align: right; font-family: var(--mono); }\n  .refs dt { font-family: var(--sans); font-weight: 600; font-size: 16px; color: var(--ink); margin-top: 14px; }\n  .refs dd { margin: 3px 0 0; font-size: 16px; color: var(--ink2); }\n  .explorer { margin-top: 26px; }\n"
+ "extra_css": "\n  .stop .tablewrap table { min-width: 520px; }\n  td.num, th.num { text-align: right; font-family: var(--mono); }\n  .refs dt { font-family: var(--sans); font-weight: 600; font-size: 16px; color: var(--ink); margin-top: 14px; }\n  .refs dd { margin: 3px 0 0; font-size: 16px; color: var(--ink2); }\n  .explorer { margin-top: 26px; }\n  .cellarbook { margin: 34px 0 0; border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); padding: 12px 0 6px; text-align: left; }\n  .cellarbook h2 { font-family: var(--mono); font-weight: 600; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 6px; max-width: none; }\n  .cellarbook table { width: 100%; min-width: 0; border-collapse: collapse; }\n  .cellarbook th { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 19px; color: var(--accent); text-transform: none; letter-spacing: 0; text-align: left; vertical-align: top; padding: 8px 18px 8px 0; width: 9.5rem; border-top: 1px solid var(--rule); }\n  .cellarbook td { font-family: var(--serif); font-size: 16px; line-height: 1.5; color: var(--ink); padding: 9px 0 8px; border-top: 1px solid var(--rule); }\n  .cellarbook th, .cellarbook td { border-bottom: 0; }\n  @media (max-width: 560px) { .cellarbook table, .cellarbook tbody, .cellarbook tr, .cellarbook th, .cellarbook td { display: block; width: auto; } .cellarbook td { border-top: 0; padding-top: 0; } }\n"
 } -->
 
 <link rel="stylesheet" href="../assets/explorer.css">
@@ -23,9 +23,10 @@
     <p class="hero-sub">
       A growing season 1 °C warmer than a region's normal moved Wine Enthusiast scores by
       <strong>{{cool}} points</strong> in cool regions and <strong>{{warm}} points</strong> in
-      warm ones. The question was whether heat helps cool places and hurts warm ones. It helped
-      the cool ones a little, and no group shows a significant negative effect; the gap between the two is not
-      statistically clear, and the checks weaken even the cool-region estimate.
+      warm ones, against a score standard deviation of {{pointsSd}}. The idea under test was
+      that heat helps cool places and hurts warm ones. It helped the cool ones a little and
+      hurt no group significantly, but the gap between the groups is not statistically clear,
+      and with region trends in the model the cool estimate falls to {{trendCool}} ({{trendCoolP}}).
     </p>
     <div class="cta-row">
       <a class="btn btn-primary" href="../">Explore each region</a>
@@ -53,6 +54,19 @@
            ({{rmseBase}} to {{rmseWeather}} points).</p>
       </div>
     </div>
+    <section class="cellarbook" aria-labelledby="vh-glance">
+      <h2 id="vh-glance">At a glance</h2>
+      <table>
+        <tbody>
+          <tr><th scope="row">Question</th><td>Does a season warmer than a region's normal raise critic scores, and does the effect turn negative in warm regions?</td></tr>
+          <tr><th scope="row">Data</th><td>{{nPanel}} reviews in {{nRegions}} regions, vintages 2000 to 2016, joined to ERA5-Land season temperature and ERA5 harvest rain against each region's 1991-2020 normal. Region list frozen in <code>data/regions.csv</code> before any weather was fetched.</td></tr>
+          <tr><th scope="row">Method</th><td>Review-level regression with region, vintage-year, variety and taster fixed effects; errors clustered by region.</td></tr>
+          <tr><th scope="row">Checks</th><td>Placebo with next year's season: {{plcCool}} cool ({{plcCoolP}}), {{plcWarm}} warm ({{plcWarmP}}). Holding out one vintage at a time against a baseline of each region-variety's mean from the other vintages: error {{rmseBase}} to {{rmseWeather}} points ({{oosImprove}}% lower, better in {{oosBetter}} of {{oosVintages}} vintages).</td></tr>
+          <tr><th scope="row">Result</th><td>Per 1 °C: {{cool}} below {{split}} °C ({{coolCi}}), {{warm}} at {{split}} °C and above ({{warmCi}}). Difference {{diff}} ({{diffP}}). Weather explains {{withinR2Pct}}% of the variation left after the fixed effects.</td></tr>
+          <tr><th scope="row">Main limitation</th><td>Tasters know the vintage, so scores can carry its reputation; one weather point stands in for each region.</td></tr>
+        </tbody>
+      </table>
+    </section>
   </section>
 </div>
 
@@ -156,7 +170,7 @@
       In the {{nCool}} regions below {{split}} °C, a season 1 °C warmer than normal moved
       scores by <strong>{{cool}}</strong> points (95% interval {{coolCi}}, {{coolP}}). In the
       {{nWarm}} regions at {{split}} °C and above it moved them by <strong>{{warm}}</strong>
-      ({{warmCi}}, {{warmP}}). The difference, {{diff}} points, has a p-value of {{diffP}}.
+      ({{warmCi}}, {{warmP}}). The difference, {{diff}} points, is not significant ({{diffP}}).
       Treating normal GST as continuous gives {{intAnom}} points per degree at {{split}} °C and
       a change of {{intSlope}} for each degree of warmer normal ({{intSlopeP}}): no detectable
       slope.

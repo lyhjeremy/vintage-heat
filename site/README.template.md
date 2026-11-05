@@ -1,6 +1,9 @@
 # Vintage Heat
 
-Do hot growing seasons make better wine, or only better wine in cool places? This project joins {{nPanel}} Wine Enthusiast reviews from {{nRegions}} wine regions (vintages 2000 to 2016) to reanalysis weather for each region's growing season (ERA5-Land temperatures, ERA5 rain), and estimates how much a season warmer or wetter than the region's 1991-2020 normal moves a critic's score.
+Do hot growing seasons make better wine, or only better wine in cool places?
+Across {{nPanel}} Wine Enthusiast reviews from {{nRegions}} regions, a season 1 °C warmer than the region's normal moved scores by {{cool}} points in cool regions ({{coolP}}) and {{warm}} in warm ones ({{warmP}}), against a score standard deviation of {{pointsSd}}; no group lost points significantly.
+
+The project joins those reviews (vintages 2000 to 2016) to reanalysis weather for each region's growing season (ERA5-Land temperatures, ERA5 rain) and estimates how much a season warmer or wetter than the region's 1991-2020 normal moves a critic's score.
 
 [Interactive site](https://lyhjeremy.github.io/vintage-heat/) · [Write-up](https://lyhjeremy.github.io/vintage-heat/overview/)
 
