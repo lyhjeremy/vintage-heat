@@ -1,5 +1,7 @@
 # Vintage Heat
 
+[![tests](https://github.com/lyhjeremy/vintage-heat/actions/workflows/tests.yml/badge.svg)](https://github.com/lyhjeremy/vintage-heat/actions/workflows/tests.yml)
+
 Do hot growing seasons make better wine, or only better wine in cool places?
 Across 55,597 Wine Enthusiast reviews from 55 regions, a season 1 °C warmer than the region's normal moved scores by +0.24 points in cool regions (p = 0.035) and +0.08 in warm ones (p = 0.29), against a score standard deviation of 3.1; no group lost points significantly.
 
